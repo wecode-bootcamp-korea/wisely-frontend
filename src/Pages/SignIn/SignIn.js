@@ -40,20 +40,21 @@ class SignIn extends Component {
             error = "필수 입력창입니다"
         } else {
             const flag = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
-            //삼항 연산자로 위의 정규 표현식 조건에 부합하t는 경우 rue(빈 문자열 아무 에러 메세지도 나오지 않음)
+            //삼항 연산자로 위의 정규 표현식 조건에 부합하는 경우 return(빈 문자열 아무 에러 메세지도 나오지 않음)
             //조건에 부합하지 않는 경우 false(에러메시지)를 return
             error = flag ? "" : "이메일 양식을 확인 해 주세요"
         }
 
         this.setState({
             userEmail: value, //e.target.value가 state로 setState가 된다
-            isValid: !error, 
+            isValid: !error, // input에 들어오는 value의 값이 undefinde 혹은 null이 아닐 때 isValid에 true를 선언
             error: error,
         });
     }
     
     render() {
         const { isValid, error, isFirst } = this.state;
+        //첫 onBlur 이벤트가 실행 됬을 때와 isValid가 false(빈 문자열 일 때) 때만 스타일이 적용 될 수 있게
         const shouldError = !isFirst && !isValid;
         return (
             <SignInBg>
@@ -111,7 +112,6 @@ class SignIn extends Component {
 const SignInBg = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/signInBg.png");
     background-size: cover;
-    background-position-x: -128px;
     height: 980px;
 `; 
 
@@ -173,6 +173,7 @@ const MailContain = styled.div `
 const EmailIdBox = styled.div `
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
     height: 48px;
     border-bottom: ${props => props.boxMsg ? "1px solid #ff1e1e" : "1px solid #ddd"};
@@ -187,9 +188,11 @@ const SendEmailId = styled.input `
     line-height: 130%;
     letter-spacing: -.06em;
     margin-left: 4px;
+    outline-style: none;
     &::placeholder {
-        opacity: 0.6;
+        opacity: 0.4;
         font-size: 18px;
+        font-weight: 350;
     }
 `;
 
@@ -199,7 +202,7 @@ const NextBtn = styled.button `
     color: #fff;
     margin-top: 40px;
     outline: none;
-    background-color: ${props => props.a ? "blue" : "#cbcbcb"};
+    background-color: ${props => props.a ? "#0055b8" : "#cbcbcb"};
     width: 100%;
     height: 60px;
     border-radius: 4px;
