@@ -3,7 +3,7 @@ import { useState } from "react";
 import Gq from "../Components/Ariticles/Gq";
 import Ja from "../Components/Ariticles/Ja";
 import Es from "../Components/Ariticles/Es";
-import FacesSection from "../Components/FacesSection";
+import FacesSection from "../Components/ProductDetail/FacesSection";
 import styled, { css } from "styled-components";
 
 function Home() {

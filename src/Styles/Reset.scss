@@ -145,9 +145,12 @@ html {
   width: 100%;
 }
 
-a,
+
 button,
 input {
   // all: unset;
   box-sizing: border-box;
+}
+a {
+  all : unset;
 }
