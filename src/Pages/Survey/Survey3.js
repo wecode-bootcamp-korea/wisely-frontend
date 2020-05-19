@@ -1,21 +1,21 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import SurveyNav from "../Components/Surveys/SurveyNav";
-import Survey4Com from "../Components/Surveys/Survey4Com";
+import SurveyNav from "../../Components/Surveys/SurveyNav";
+import Survey3Com from "../../Components/Surveys/Survey3Com";
 
-const Survey4 = () => {
+const Survey3 = () => {
   return (
     <Survey1Wrapper>
       {/* <GlobalStyles /> */}
 
       <SurveyNav />
 
-      <Survey4Com />
+      <Survey3Com />
     </Survey1Wrapper>
   );
 };
 
-export default Survey4;
+export default Survey3;
 
 const Survey1Wrapper = styled.div`
   font-family: "Spoqa Han Sans";

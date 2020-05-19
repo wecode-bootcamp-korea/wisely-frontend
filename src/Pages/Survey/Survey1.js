@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import SurveyNav from "../Components/Surveys/SurveyNav";
-import Survey1Com from "../Components/Surveys/Survey1Com";
+import SurveyNav from "../../Components/Surveys/SurveyNav";
+import Survey1Com from "../../Components/Surveys/Survey1Com";
 
 const Survey1 = () => {
   return (

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const SurveyFoCom = () => {
+const SurveyFoCom = (props) => {
   const tabs = ["미드나이트 네이비", "사파이어 블루", "슬레이트 그레이"];
   const colortabs = ["#122141", "#3A81C1", "#CECECE"];
   const shaverimgtabs = [
@@ -14,6 +15,10 @@ const SurveyFoCom = () => {
 
   const clickHandlevent = (id) => {
     setIsContact(id);
+  };
+
+  const goTo = (path) => {
+    props.history.push(path);
   };
 
   return (
@@ -60,7 +65,7 @@ const SurveyFoCom = () => {
           </SelectBox>
           {/**/}
           <NextBtnBox1Wrapper>
-            <BtnBox>
+            <BtnBox onClick={() => goTo("/Survey5")}>
               <p>결과보기</p>
             </BtnBox>
           </NextBtnBox1Wrapper>
@@ -70,7 +75,7 @@ const SurveyFoCom = () => {
   );
 };
 
-export default SurveyFoCom;
+export default withRouter(SurveyFoCom);
 
 const SurveySeComWrapper = styled.div`
   min-height: calc(100vh - 89px);
@@ -244,12 +249,3 @@ const BtnBox = styled.button`
   line-height: 59px;
   letter-spacing: -0.06em;
 `;
-
-// const Hi = styled.div`
-//   animation-name: navHesupimg;
-//   animation-duration: 1.5s;
-//   animation-timing-function: ease-in-out;
-// `;
-
-// const navHesupimg = keyframes`
-// {   from {     opacity: 0;   }   to {     opacity: 60px;   } } `;
