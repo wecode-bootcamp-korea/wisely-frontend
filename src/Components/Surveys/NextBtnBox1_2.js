@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const NextBtnBox2 = () => {
+const NextBtnBox2 = (props) => {
+  const goTo = (path) => {
+    props.history.push(path);
+  };
   return (
     <NextBtnBox1Wrapper>
       <BtnTextBox>
@@ -9,14 +13,14 @@ const NextBtnBox2 = () => {
         <p>하루에 한 번 면도 한다면 날은 2주마다 교체해 주세요.</p>{" "}
         {/*이부분 props값으로 가져오기*/}
       </BtnTextBox>
-      <BtnBox>
+      <BtnBox onClick={() => goTo("/Survey2")}>
         <p>다음</p>
       </BtnBox>
     </NextBtnBox1Wrapper>
   );
 };
 
-export default NextBtnBox2;
+export default withRouter(NextBtnBox2);
 
 const NextBtnBox1Wrapper = styled.div`
   margin-top: 50px;

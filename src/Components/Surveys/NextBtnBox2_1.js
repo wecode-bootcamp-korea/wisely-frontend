@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const NextBtnBox2_1 = () => {
+const NextBtnBox2_1 = (props) => {
+  const goTo = (path) => {
+    props.history.push(path);
+  };
+
   return (
     <NextBtnBox1Wrapper>
       <BtnTextBox>
         <p>산뜻하고 끈적임 없는 제품으로 추천해드릴게요</p>
       </BtnTextBox>
-      <BtnBox>
+      <BtnBox onClick={() => goTo("/Survey3")}>
         <p>다음</p>
       </BtnBox>
     </NextBtnBox1Wrapper>
   );
 };
 
-export default NextBtnBox2_1;
+export default withRouter(NextBtnBox2_1);
 
 const NextBtnBox1Wrapper = styled.div`
   margin-top: 50px;

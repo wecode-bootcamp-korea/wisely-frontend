@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const NextBtnBox1 = () => {
+const NextBtnBox1 = (props) => {
+  const goTo = (path) => {
+    props.history.push(path);
+  };
+
   return (
     <NextBtnBox1Wrapper>
       <BtnTextBox>
         <p>오래된 면도날은 턱 주변 트러블의 원인이 된답니다.</p>
         <p>하루에 여러 번 면도 한다면 날은 1주마다 교체해 주세요.</p>
       </BtnTextBox>
-      <BtnBox>
+      <BtnBox onClick={() => goTo("/Survey2")}>
         <p>다음</p>
       </BtnBox>
     </NextBtnBox1Wrapper>
   );
 };
 
-export default NextBtnBox1;
+export default withRouter(NextBtnBox1);
 
 const NextBtnBox1Wrapper = styled.div`
   margin-top: 50px;

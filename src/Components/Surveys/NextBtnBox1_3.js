@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const NextBtnBox3 = () => {
+const NextBtnBox3 = (props) => {
+  const goTo = (path) => {
+    props.history.push(path);
+  };
+
   return (
     <NextBtnBox1Wrapper>
       <BtnTextBox>
@@ -9,14 +14,14 @@ const NextBtnBox3 = () => {
         <p>2~3일에 한 번 면도 한다면 날은 4주마다 교체해 주세요.</p>
         {/*이부분 props값으로 가져오기??????조건부객체에서 렌더링하는데 되나?*/}
       </BtnTextBox>
-      <BtnBox>
+      <BtnBox onClick={() => goTo("/Survey2")}>
         <p>다음</p>
       </BtnBox>
     </NextBtnBox1Wrapper>
   );
 };
 
-export default NextBtnBox3;
+export default withRouter(NextBtnBox3);
 
 const NextBtnBox1Wrapper = styled.div`
   margin-top: 50px;

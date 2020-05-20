@@ -1,4 +1,9 @@
-html,
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+
+const GlobalStyles = createGlobalStyle`
+     ${reset};
+     html,
 body,
 div,
 span,
@@ -24,7 +29,7 @@ code,
 del,
 dfn,
 em,
-// img,
+img,
 ins,
 kbd,
 q,
@@ -85,11 +90,11 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  text-decoration: none;
+  color: inherit;
   box-sizing: border-box;
 }
-
 /* HTML5 display-role reset for older browsers */
-
 article,
 aside,
 details,
@@ -103,68 +108,27 @@ nav,
 section {
   display: block;
 }
-
 body {
   line-height: 1;
 }
-
 ol,
 ul {
   list-style: none;
 }
-
 blockquote,
 q {
   quotes: none;
 }
-
-blockquote {
-  &:before,
-  &:after {
-    content: "";
-    content: none;
-  }
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
-
-q {
-  &:before,
-  &:after {
-    content: "";
-    content: none;
-  }
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-body,
-html {
-  background-color: #ffffff;
-  width: 100%;
-}
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 26491ff... globalstyle로 수정
-button,
-input {
-  // all: unset;
-  box-sizing: border-box;
-}
-<<<<<<< HEAD
-a {
-  all : unset;
-}
-=======
-
-a {
-  all: unset;
-}
-
-* {
-  font-family: "Spoqa Han Sans";
-}
->>>>>>> 26491ff... globalstyle로 수정
+`;
+export default GlobalStyles;

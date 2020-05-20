@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const SurveyZeroCom = () => {
+const SurveyZeroCom = (props) => {
+  const goTo = (path) => {
+    props.history.push(path);
+  };
+
   return (
     <SurveyZeroComWrapper>
       <PushSubscription>
@@ -17,7 +22,7 @@ const SurveyZeroCom = () => {
           <Surveystep0img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/subscriptionSurveyStep0.svg" />
         </ImgBox>
 
-        <BtnBox>
+        <BtnBox onClick={() => goTo("/Survey1")}>
           <StartBtn>1 분이면 끝나는 퀴즈 시작</StartBtn>
         </BtnBox>
       </PushSubscription>
@@ -25,7 +30,7 @@ const SurveyZeroCom = () => {
   );
 };
 
-export default SurveyZeroCom;
+export default withRouter(SurveyZeroCom);
 
 const SurveyZeroComWrapper = styled.div`
   min-height: calc(100vh - 89px);

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const SurveySeComCopy = () => {
+const SurveySeComCopy = (props) => {
   // const tabs = [
   //   "강한 자극과 따가움",
   //   "피부 붉어짐",
@@ -10,6 +11,10 @@ const SurveySeComCopy = () => {
   //   "수염이 바짝 깎이지 않음",
   //   "없음",
   // ];
+
+  const goTo = (path) => {
+    props.history.push(path);
+  };
 
   const [isContact, setIsContact] = useState(-1);
 
@@ -138,7 +143,7 @@ const SurveySeComCopy = () => {
           </SelectBox>
           {/**/}
           <NextBtnBox1Wrapper>
-            <BtnBox>
+            <BtnBox onClick={() => goTo("/Survey4")}>
               <p>다음</p>
             </BtnBox>
           </NextBtnBox1Wrapper>
@@ -149,7 +154,7 @@ const SurveySeComCopy = () => {
   );
 };
 
-export default SurveySeComCopy;
+export default withRouter(SurveySeComCopy);
 
 const SurveySeComWrapper = styled.div`
   min-height: calc(100vh - 89px);

@@ -3,7 +3,10 @@ import { useState } from "react";
 import Gq from "../Components/Ariticles/Gq";
 import Ja from "../Components/Ariticles/Ja";
 import Es from "../Components/Ariticles/Es";
-import FacesSection from "../Components/ProductDetail/FacesSection";
+
+import FacesSection from "../Components/FacesSection";
+import Nav from "../Components/Nav";
+import Footer from "../Components/Footer";
 import styled, { css } from "styled-components";
 
 function Home() {
@@ -16,7 +19,8 @@ function Home() {
   const articles = { 0: <Gq />, 1: <Ja />, 2: <Es /> };
 
   return (
-    <>
+    <HomeWrapper>
+      <Nav />
       <FirstSection>
         <HomeTitle>
           정직한 가격의
@@ -26,7 +30,7 @@ function Home() {
         <HomeTitleSpan>
           독일산 5중날 8,900원, 첫 가입시 면도기를 드려요
         </HomeTitleSpan>
-        <MoreInfoBtn href='https://www.wiselyshave.com/subscription-info'>
+        <MoreInfoBtn href="https://www.wiselyshave.com/subscription-info">
           더 알아보기
         </MoreInfoBtn>
       </FirstSection>
@@ -45,15 +49,15 @@ function Home() {
             특별한 패키지와 쇼핑백도 제공됩니다.
           </HomeGiftSetP>
           <HomeGiftSetSpan>* 한정판매 상품입니다.</HomeGiftSetSpan>
-          <MoreInfoBtn href='https://www.wiselyshave.com/subscription-info'>
+          <MoreInfoBtn href="https://www.wiselyshave.com/subscription-info">
             더 알아보기
           </MoreInfoBtn>
         </HomeGiftset>
       </SecondSection>
       <ThirdSection>
         <ThirdSectionImg
-          src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_fooled.png'
-          alr=''
+          src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_fooled.png"
+          alr=""
         />
         <div>
           <ThirdSectionH2>더 이상 속지 마세요</ThirdSectionH2>
@@ -62,7 +66,7 @@ function Home() {
             <br />
             마케팅을 걷어내고,최고급 면도날을 정직한 가격에 제공합니다.
           </ThirdSectionP>
-          <BrandStoryBtn href='https://www.wiselyshave.com/story/brand'>
+          <BrandStoryBtn href="https://www.wiselyshave.com/story/brand">
             브랜드 스토리<ThirdSectionSpan></ThirdSectionSpan>
           </BrandStoryBtn>
         </div>
@@ -83,8 +87,8 @@ function Home() {
           </FourthSectionP>
         </FourthSectionDiv>
         <FourthSectionImg
-          src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_razor_info.png'
-          art=''
+          src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_razor_info.png"
+          art=""
         />
       </FourthSection>
       <FifthSection>
@@ -95,8 +99,8 @@ function Home() {
           <FifthSectionFigContainer>
             <FifthSectionFig>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_1.png'
-                art=''
+                src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_1.png"
+                art=""
               />
               <FigCaption>
                 <FigCaptionName>면도기</FigCaptionName>
@@ -105,8 +109,8 @@ function Home() {
             </FifthSectionFig>
             <FifthSectionFigRight>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_2.png'
-                art=''
+                src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_2.png"
+                art=""
               />
               <FigCaption>
                 <FigCaptionName>리필 면도날</FigCaptionName>
@@ -117,8 +121,8 @@ function Home() {
           <FifthSectionFigContainer>
             <FifthSectionFig>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_3.png'
-                art=''
+                src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_3.png"
+                art=""
               />
               <FigCaption>
                 <FigCaptionName>쉐이빙젤</FigCaptionName>
@@ -127,8 +131,8 @@ function Home() {
             </FifthSectionFig>
             <FifthSectionFigRight>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_4.png'
-                art=''
+                src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_4.png"
+                art=""
               />
               <FigCaption>
                 <FigCaptionName>리페어 애프터쉐이브</FigCaptionName>
@@ -137,7 +141,7 @@ function Home() {
             </FifthSectionFigRight>
           </FifthSectionFigContainer>
         </FifthSectionDiv>
-        <RecommendBtn href='https://www.wiselyshave.com/subscription-survey/0'>
+        <RecommendBtn href="https://www.wiselyshave.com/subscription-survey/0">
           나에게 맞는 제품 추천 받기
         </RecommendBtn>
       </FifthSection>
@@ -168,18 +172,23 @@ function Home() {
             <br />
             <EighthSectionStong>클럽 구독 시 면도기 무료</EighthSectionStong>
           </EighthSectionH2>
-          <StartingBtn href='https://www.wiselyshave.com/subscription-info'>
+          <StartingBtn href="https://www.wiselyshave.com/subscription-info">
             시작하기
           </StartingBtn>
         </EighthSectionDiv>
         <EighthSectionImg
-          src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/start_subscribe.png'
-          art=''
+          src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/start_subscribe.png"
+          art=""
         />
       </EighthSection>
-    </>
+      <Footer />
+    </HomeWrapper>
   );
 }
+
+const HomeWrapper = styled.div`
+  font-family: "Spoqa Han Sans";
+`;
 
 const FirstSection = styled.section`
   width: 100%;
