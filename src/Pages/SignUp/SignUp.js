@@ -8,14 +8,29 @@ class SignUp extends Component {
         this.state = {
             userPwd: "",
             userPhone: "",
-            userError: "",
-            isValid: false
+            userBirth: "",
+            userName: "",
+            pwdError: "",
+            phoneError: "",
+            birthError: "",
+            nameError: "",
+            pwValid: false,
+            birthValid: true,
+            nameValid: true,
+            phoneValid: true,
+            firstText: false,
+            infoBtn : false
         }
     }
 
-    changeHandle = e => {
-       
-        // const phoneNumRule = /^\d{3}-\d{3,4}-\d{4}$/;
+    setFirText = () => {
+        this.setState({
+            firstText: true
+        })
+    }
+
+    changePwHandle = e => {
+
         let errorMsg = "";        
         
         if(e.target.value === 0) {
@@ -27,13 +42,81 @@ class SignUp extends Component {
         
         this.setState({
             userPwd: e.target.value,
+            pwValid: !errorMsg,
+            pwdError: errorMsg
+        })
+    }
+
+    changePhoneHandle = e => {
+
+        let phoneErrorMsg = "";
+        if(!e.target.value) {
+            phoneErrorMsg = "휴대폰 번호는 필수 입력 창입니다";
+        } else {
+            const phoneNumRule = (/^\d{3}-\d{3,4}-\d{4}$/).test(e.target.value);
+            phoneErrorMsg = phoneNumRule ? "" : "휴대폰 번호를 올바르게 입력해주세요";
+        }
+
+        this.setState({
             userPhone: e.target.value,
-            isValid: !errorMsg,
-            userError: errorMsg
+            phoneValid: !phoneErrorMsg,
+            phoneError: phoneErrorMsg
+        })
+    }
+
+    changeBirthHandle = e => {
+
+        let birthErrorMsg = "";
+
+        if(!e.target.value) {
+            birthErrorMsg = "생년월일은 번호는 필수 입력 창입니다";
+        } else {
+            const birthDayRule = (/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/).test(e.target.value);
+            birthErrorMsg = birthDayRule ? "" : "생년월일을 올바르게 입력해주세요";
+        }
+
+        this.setState({
+            userBirth: e.target.value,
+            birthValid: !birthErrorMsg,
+            birthError: birthErrorMsg
+        })
+    }
+
+    changeNameHandle = e => {
+
+        let nameErrorMsg = "";
+
+        if(!e.target.value) {
+            nameErrorMsg = "이름은 필수 입력 창입니다";
+        } else {
+            const nameRule = (/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/).test(e.target.value);
+            nameErrorMsg = nameRule ? "" : "이름을 올바르게 입력해주세요";
+        }
+
+        this.setState({
+            userBirth: e.target.value,
+            nameValid: !nameErrorMsg,
+            nameError: nameErrorMsg
+        })
+    }
+
+    clickHandle = e => {
+        this.setState({
+            infoBtn: !this.state.infoBtn
         })
     }
     
     render() {
+        const { pwValid, birthValid, phoneValid, 
+            nameValid, firstText, pwdError, phoneError, 
+            birthError, nameError, infoBtn } = this.state
+        
+        const anonError = firstText && pwValid;
+        const firTypeError = !firstText && !pwValid;
+        const secTypeError = !firstText && !phoneValid;
+        const thrTypeError = !firstText && !birthValid;
+        const fourTypeError = !firstText && !nameValid;
+        
         return(
             <SignUpBg>
                 <SignUpContain>
@@ -52,22 +135,34 @@ class SignUp extends Component {
                                 <CheckBox />
                             </EmailIdContain>
                             <PwBox>비밀번호</PwBox>
-                            <PwContain>
-                                <DefaultPw type="password" placeholder=" 비밀번호(6자 이상)" />
+                            <PwContain first={ firstText } isValid={ pwValid }>
+                                <DefaultPw onChange={this.changePwHandle} onBlur={this.setFirText} type="password" placeholder=" 비밀번호(6자 이상)" />
                                 <PwOff />
                             </PwContain>
+                            { firTypeError && (<DangerMsg msg={ pwdError } onChange={this.changePwHandle}>
+                                { pwdError }
+                            </DangerMsg>) }
                             <PhoneNumBox>휴대폰번호</PhoneNumBox>
-                            <PhoneNumContain>
-                                <DefaultPhoneNum placeholder=" 휴대폰번호('-'제외)" />
+                            <PhoneNumContain action={ secTypeError }>
+                                <DefaultPhoneNum onChange={this.changePhoneHandle} onBlur={this.setFirText} placeholder=" 휴대폰번호('-'제외)" />
                             </PhoneNumContain>
+                            { secTypeError && (<DangerMsg msg={ phoneError } onChange={this.changePhoneHandle}>
+                                    { phoneError }
+                                </DangerMsg>) }
                             <BirthDayBox>생년월일</BirthDayBox>
-                            <BirthDayContain>
-                                <DefaultBirthDay placeholder=" 생년월일 6자리(예:860617)" />
+                            <BirthDayContain action={ thrTypeError }>
+                                <DefaultBirthDay onChange={this.changeBirthHandle} onBlur={this.setFirText} placeholder=" 생년월일 6자리(예:860617)" />
                             </BirthDayContain>
+                            { thrTypeError && (<DangerMsg msg={ birthError } onChange={this.changeBirthHandle}>
+                                    { birthError }
+                                </DangerMsg>) }
                             <NameBox>이름</NameBox>
-                            <NameContain>
-                                <DefaultName placeholder=" 이름"/>
+                            <NameContain action={ fourTypeError }>
+                                <DefaultName onChange={this.changeNameHandle} onBlur={this.setFirText} placeholder=" 이름"/>
                             </NameContain>
+                            { fourTypeError && (<DangerMsg msg={nameError} onChange={this.changeNameHandle}>
+                                    { nameError }
+                                </DangerMsg>) }
                             <GenderBox>성별</GenderBox>
                             <GenderContain>
                                 <GenderLabel>
@@ -75,7 +170,7 @@ class SignUp extends Component {
                                     <GenderType>남자</GenderType>
                                 </GenderLabel>
                                 <GenderLabel>
-                                    <CheckGender type="radio" name="gender" value="female" checked />
+                                    <CheckGender type="radio" name="gender" value="female" />
                                     <GenderType>여자</GenderType>
                                 </GenderLabel>
                             </GenderContain>
@@ -88,9 +183,8 @@ class SignUp extends Component {
                                 <MarketingTitle>
                                     와이즐리 혜택 알림 받기
                                 </MarketingTitle>
-                                <Switch>
-                                    <SwitchInput type="checkbox"/>
-                                    <Slider></Slider>
+                                <Switch change={ infoBtn } onClick={this.clickHandle}>
+                                    <SlideBall change={ infoBtn } onClick={this.clickHandle} />
                                 </Switch>
                             </MarketingBox>
                             <MarketingInfo>
@@ -214,7 +308,29 @@ const PwContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: 1px solid #ddd;
+    ${props => {
+        // if(props.first && !props.isValid) {
+        //     return `border-bottom: 1px solid #ff1e1e`;
+        // } else if(props.first && props.isValid) {
+        //     return `border-bottom: 1px solid #0055b8`;
+        // } else {
+        //     return `border-bottom: 1px solid #ddd`;
+        // }
+        if(props.isValid) {
+            return `border-bottom: 1px solid #0055b8`;  
+        } else {
+            return `border-bottom: 1px solid #ddd`; 
+        }
+    }};
+`;
+
+const DangerMsg = styled.p `
+    display: ${props => props.msg ? "" : "none"};
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -.04em;
+    color: #ff1e1e;
 `;
 
 const DefaultPw = styled.input `
@@ -291,7 +407,7 @@ const BirthDayContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: ${props => props.action ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DefaultBirthDay = styled.input `
@@ -326,7 +442,7 @@ const NameContain = styled.div `
     align-items: center;
     margin-top: 1px;
     height: 48px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: ${props => props.action ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DefaultName = styled.input `
@@ -428,52 +544,25 @@ const MarketingTitle = styled.div `
 const Switch = styled.label `
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-`;
-
-const SwitchInput = styled.input `
-    opacity: 0;
-    width: 0;
-    height: 0;
-    &:checked {
-        background-color: #0055b8;
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
-    &:focus {
-        box-shadow: 0 0 1px #0055b8;
-    }
-`;
-
-const Slider = styled.span `
-    position: absolute;
+    width: 55px;
+    height: 25px;
+    background-color: ${props => props.change ? "#0055b8;" : "#ccc"};
+    border-radius: 32px;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 34px;
-    background-color: #0055b8;
-    box-shadow: 0 0 1px #0055b8;
-    -webkit-transition: .4s;
     transition: .4s;
-    &:before {
-        position: absolute;
-        content: " ";
-        width: 26px;
-        height: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        border-radius: 50%;
-        -webkit-transition: .4s;
-        transition: .4s;
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
+`;
+
+const SlideBall = styled.div `
+    position: absolute;
+    content: "";
+    height: 21px;
+    width: 21px;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+    transform: ${props => props.change ? "translateX(26px)" : ""};
 `;
 
 const MarketingInfo = styled.div `
@@ -484,6 +573,6 @@ const MarketingInfo = styled.div `
     line-height: 140%;
     letter-spacing: -.04em;
     color: #979797;
-`
+`;
 
 export default SignUp;
