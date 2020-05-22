@@ -11,37 +11,54 @@ class SignUp extends Component {
             userPhone: "",
             userBirth: "",
             userName: "",
+            mailError: "",
             pwdError: "",
             phoneError: "",
             birthError: "",
             nameError: "",
+            mailValid: false,
             pwValid: false,
-            birthValid: true,
-            nameValid: true,
-            phoneValid: true,
-            firstText: false,
-            infoBtn : false
+            birthValid: false,
+            nameValid: false,
+            phoneValid: false,
+            firstText: true,
+            infoBtn : false,
         }
     }
 
     setFirText = () => {
         this.setState({
-            firstText: true
+            firstText: false
         })
+    }
+
+    handleEmail = e => {
+        let error = "";
+        console.log("handleEmail")
+        if (!e.target.value) {
+            error = "필수 입력창입니다"
+        } else {
+            const flag = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(e.target.value);
+            error = flag ? "" : "이메일 양식을 확인 해 주세요"
+        }
+
+        this.setState({
+            userMail: e.target.value,
+            mailValid: !error, 
+            mailError: error
+        });
     }
 
     changePwHandle = e => {
 
         let errorMsg = "";        
         
-        if(e.target.value === 0) {
+        if(!e.target.value) {
             errorMsg = "필수 입력창입니다"
         } else {
-            const passRule = (/^[A-Za-z0-9]{6,12}$/).test(e.target.value);
+            const passRule = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(e.target.value);
             errorMsg = passRule ? "" : "비밀번호 양식을 확인 해 주세요"
         }
-
-        
         
         this.setState({
             userPwd: e.target.value,
@@ -91,6 +108,8 @@ class SignUp extends Component {
 
         if(!e.target.value) {
             nameErrorMsg = "이름은 필수 입력 창입니다";
+        } else {
+            nameErrorMsg = "";
         }
 
         this.setState({
@@ -130,14 +149,16 @@ class SignUp extends Component {
     render() {
         const { pwValid, birthValid, phoneValid, 
             nameValid, firstText, pwdError, phoneError, 
-            birthError, nameError, infoBtn } = this.state
+            birthError, nameError, infoBtn, mailValid, mailError } = this.state
         
-        const anonError = firstText && pwValid;
+        const anonError = !firstText && !mailValid;
         const firTypeError = !firstText && !pwValid;
         const secTypeError = !firstText && !phoneValid;
         const thrTypeError = !firstText && !birthValid;
         const fourTypeError = !firstText && !nameValid;
         
+        // console.log("anonError :" , anonError)
+
         return(
             <SignUpBg>
                 <SignUpContain>
@@ -151,39 +172,45 @@ class SignUp extends Component {
                         </SignUpTitle>
                         <InfoContain>
                             <IdBox>아이디</IdBox>
-                            <EmailIdContain>
-                                <DefaultId></DefaultId>
-                                <CheckBox />
+                            <EmailIdContain msgBox={ anonError }>
+                                <DefaultId onChange={ this.handleEmail } onBlur={ this.setFirText } placeholder=" 이메일" />
+                                <CheckBoxOne viewOne={ mailValid } onChange={ this.handleEmail } />
                             </EmailIdContain>
-                            <PwBox>비밀번호</PwBox>
-                            <PwContain first={ firstText } isValid={ pwValid }>
-                                <DefaultPw onChange={this.changePwHandle} onBlur={this.setFirText} type="password" placeholder=" 비밀번호(6자 이상)" />
-                                <PwOff />
-                            </PwContain>
-                            { firTypeError && (<DangerMsg msg={ pwdError } onChange={this.changePwHandle}>
-                                { pwdError }
+                            { anonError && (<DangerMsg msgOne={ mailError } onChange={ this.handleEmail }>
+                                { mailError }
                             </DangerMsg>) }
+                            <PwBox>비밀번호</PwBox>
+                            <PwContain msgBoxSec={ firTypeError }>
+                                <DefaultPw onChange={ this.changePwHandle } onBlur={ this.setFirText } type="password" placeholder=" 비밀번호(특수문자 포함 8자 이상)" />
+                                <CheckBoxTwo viewTwo={ pwValid } onChange={ this.changePwHandle } />
+                            </PwContain>
+                            { firTypeError && (<DangerMsgTwo msgTwo={ pwdError } onBlur={ this.setFirText } onChange={ this.changePwHandle }>
+                                { pwdError }
+                            </DangerMsgTwo>) }
                             <PhoneNumBox>휴대폰번호</PhoneNumBox>
-                            <PhoneNumContain action={ secTypeError }>
-                                <DefaultPhoneNum onChange={this.changePhoneHandle} onBlur={this.setFirText} placeholder=" 휴대폰번호('-'제외)" />
+                            <PhoneNumContain msgBoxThr={ secTypeError } onBlur={ this.setFirText } onChange={this.changePhoneHandle}>
+                                <DefaultPhoneNum placeholder=" 휴대폰번호('-'제외)" />
+                                <CheckBoxThree viewThr={ phoneValid } onChange={ this.changePhoneHandle } />
                             </PhoneNumContain>
-                            { secTypeError && (<DangerMsg msg={ phoneError } onChange={this.changePhoneHandle}>
+                            { secTypeError && (<DangerMsgThree msgThr={ phoneError } onChange={ this.changePhoneHandle }>
                                     { phoneError }
-                                </DangerMsg>) }
+                                </DangerMsgThree>) }
                             <BirthDayBox>생년월일</BirthDayBox>
-                            <BirthDayContain action={ thrTypeError }>
-                                <DefaultBirthDay onChange={this.changeBirthHandle} onBlur={this.setFirText} placeholder=" 생년월일 6자리(예:860617)" />
+                            <BirthDayContain msgBoxfour={ thrTypeError }>
+                                <DefaultBirthDay onChange={ this.changeBirthHandle } onBlur={ this.setFirText } placeholder=" 생년월일(예:YYYY-MM-DD)" />
+                                <CheckBoxFour viewFour={ birthValid } onChange={ this.changeBirthHandle } />
                             </BirthDayContain>
-                            { thrTypeError && (<DangerMsg msg={ birthError } onChange={this.changeBirthHandle}>
+                            { thrTypeError && (<DangerMsgFour msgFour={ birthError } onChange={ this.changeBirthHandle }>
                                     { birthError }
-                                </DangerMsg>) }
+                                </DangerMsgFour>) }
                             <NameBox>이름</NameBox>
-                            <NameContain action={ fourTypeError }>
-                                <DefaultName onChange={this.changeNameHandle} onBlur={this.setFirText} placeholder=" 이름"/>
+                            <NameContain msgBoxFive={ fourTypeError } >
+                                <DefaultName onChange={ this.changeNameHandle } onBlur={ this.setFirText } placeholder=" 이름"/>
+                                <CheckBoxFive viewFive={ nameValid } onChange={ this.changeNameHandle } />
                             </NameContain>
-                            { fourTypeError && (<DangerMsg msg={nameError} onChange={this.changeNameHandle}>
+                            { fourTypeError && (<DangerMsgFive msgFive={ nameError } onChange={ this.changeNameHandle }>
                                     { nameError }
-                                </DangerMsg>) }
+                                </DangerMsgFive>) }
                             <GenderBox>성별</GenderBox>
                             <GenderContain>
                                 <GenderLabel>
@@ -291,7 +318,7 @@ const EmailIdContain = styled.div `
     justify-content: space-between;
     align-items: center;
     height: 48px;
-    border-bottom: 1px solid #0055b8;
+    border-bottom: ${props => props.msgBox ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DefaultId = styled.input `
@@ -310,10 +337,39 @@ const DefaultId = styled.input `
     }
 `;
 
-const CheckBox = styled.div `
+const CheckBoxOne = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
+    display: ${props => props.viewOne ? "" : "none"};
+`;
+
+const CheckBoxTwo = styled.div `
+    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    width: 36px;
+    height: 36px;
+    display: ${props => props.viewTwo ? "" : "none"};
+`;
+
+const CheckBoxThree = styled.div `
+    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    width: 36px;
+    height: 36px;
+    display: ${props => props.viewThr ? "" : "none"};
+`;
+
+const CheckBoxFour = styled.div `
+    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    width: 36px;
+    height: 36px;
+    display: ${props => props.viewFour ? "" : "none"};
+`;
+
+const CheckBoxFive = styled.div `
+    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    width: 36px;
+    height: 36px;
+    display: ${props => props.viewFive ? "" : "none"};
 `;
 
 const PwBox = styled.div `
@@ -332,24 +388,47 @@ const PwContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    ${props => {
-        // if(props.first && !props.isValid) {
-        //     return `border-bottom: 1px solid #ff1e1e`;
-        // } else if(props.first && props.isValid) {
-        //     return `border-bottom: 1px solid #0055b8`;
-        // } else {
-        //     return `border-bottom: 1px solid #ddd`;
-        // }
-        if(props.isValid) {
-            return `border-bottom: 1px solid #0055b8`;  
-        } else {
-            return `border-bottom: 1px solid #ddd`; 
-        }
-    }};
+    border-bottom: ${props => props.msgBoxSec ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DangerMsg = styled.p `
-    display: ${props => props.msg ? "" : "none"};
+    display: ${props => props.msgOne ? "" : "none"};
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -.04em;
+    color: #ff1e1e;
+`;
+
+const DangerMsgTwo = styled.p `
+    display: ${props => props.msgTwo ? "" : "none"};
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -.04em;
+    color: #ff1e1e;
+`;
+
+const DangerMsgThree = styled.p `
+    display: ${props => props.msgThr ? "" : "none"};
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -.04em;
+    color: #ff1e1e;
+`;
+
+const DangerMsgFour = styled.p `
+    display: ${props => props.msgFour ? "" : "none"};
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -.04em;
+    color: #ff1e1e;
+`;
+
+const DangerMsgFive = styled.p `
+    display: ${props => props.msgFive? "" : "none"};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -374,13 +453,6 @@ const DefaultPw = styled.input `
     }
 `;
 
-const PwOff = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/passwordOff.svg");
-    width: 30px;
-    height: 25px;
-    cursor: pointer;
-`;
-
 const PhoneNumBox = styled.div `
     margin-top: 24px;
     font-size: 12px;
@@ -396,7 +468,7 @@ const PhoneNumContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: ${props => props.msgBoxThr ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DefaultPhoneNum = styled.input `
@@ -431,7 +503,7 @@ const BirthDayContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: ${props => props.action ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: ${props => props.msgBoxfour ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DefaultBirthDay = styled.input `
@@ -466,7 +538,7 @@ const NameContain = styled.div `
     align-items: center;
     margin-top: 1px;
     height: 48px;
-    border-bottom: ${props => props.action ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: ${props => props.msgBoxFive ? "1px solid #ff1e1e" : "1px solid #ddd" };
 `;
 
 const DefaultName = styled.input `
@@ -525,7 +597,7 @@ const SuccessBtn = styled.button `
     color: #fff;
     margin-top: 40px;
     outline: none;
-    background-color: #cbcbcb;
+    background-color: #0055b8;
     width: 100%;
     height: 60px;
     border-radius: 4px;
