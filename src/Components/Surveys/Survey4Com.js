@@ -1,24 +1,39 @@
 import React, { useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import { connect } from "react-redux";
+import { addSelect4 } from "../../store/actions/addSelect4";
 import { withRouter } from "react-router-dom";
 
 const SurveyFoCom = (props) => {
-  const tabs = ["미드나이트 네이비", "사파이어 블루", "슬레이트 그레이"];
   const colortabs = ["#122141", "#3A81C1", "#CECECE"];
   const shaverimgtabs = [
     "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razor_lie_navy.png",
     "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razor_lie_blue.png",
     "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razor_lie_gray.png",
   ];
+  const [quesTitle, setQuesTitle] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  const [isContact4, setIsContact4] = useState(0);
 
-  const [isContact, setIsContact] = useState(0);
+  useEffect(() => {
+    fetch("http://10.58.7.74:8000/subscription-survey/4")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("타이틀 :", res.data.question);
+        console.log("조그만글 :", res.data.answers);
+
+        setQuesTitle(res.data.question);
+        setAnswers(res.data.answers);
+      });
+  }, []);
 
   const clickHandlevent = (id) => {
-    setIsContact(id);
+    setIsContact4(id);
   };
 
   const goTo = (path) => {
     props.history.push(path);
+    props.addSelect4(isContact4 + 1);
   };
 
   return (
@@ -31,19 +46,19 @@ const SurveyFoCom = (props) => {
           </SurveyNumber>
           <LittleTi>구독시 무료로 드려요!</LittleTi>
           <SubTitle>
-            <SubTitleInn>면도기 핸들 색상을 선택해주세요</SubTitleInn>
+            <SubTitleInn>{quesTitle}</SubTitleInn>
           </SubTitle>
           {/**/}
           <SelectBox>
-            {tabs.map((tabname, idx) => {
+            {answers.map((tabname, idx) => {
               return (
                 <ItemWrapper>
                   <ItemBoxWrapper
                     onClick={(e) => clickHandlevent(idx)}
-                    contactBoxchange={isContact}
+                    contactBoxchange={isContact4}
                     keyId={idx}
                   >
-                    <TextBox contactBoxchange={isContact} keyId={idx}>
+                    <TextBox contactBoxchange={isContact4} keyId={idx}>
                       <Color
                         style={{ backgroundColor: `${colortabs[idx]}` }}
                       ></Color>
@@ -55,7 +70,7 @@ const SurveyFoCom = (props) => {
                   <ImgWrapper>
                     <ImageShaver
                       src={shaverimgtabs[idx]}
-                      style={{ opacity: isContact === idx ? 1 : 0 }}
+                      style={{ opacity: isContact4 === idx ? 1 : 0 }}
                     ></ImageShaver>
                     {/* {shaverimgtabs[idx]} 위에 대신 이런방법도 있음, {shaverimgtabs[isContact]} */}
                   </ImgWrapper>
@@ -75,7 +90,7 @@ const SurveyFoCom = (props) => {
   );
 };
 
-export default withRouter(SurveyFoCom);
+export default withRouter(connect(null, { addSelect4 })(SurveyFoCom));
 
 const SurveySeComWrapper = styled.div`
   min-height: calc(100vh - 89px);

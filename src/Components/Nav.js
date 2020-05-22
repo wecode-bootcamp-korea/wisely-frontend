@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 
-const Nav = () => {
+const Nav = (props) => {
   const [seeSup, setSeeSup] = useState(false);
   console.log(seeSup);
+
+  const goTo = (path) => {
+    props.history.push(path);
+  };
 
   return (
     <div>
       <Header>
         <Naviga>
-          <h1 className="wisely">
+          <h1 className="wisely" onClick={() => goTo("/")}>
             <img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg" />
           </h1>
 
@@ -66,7 +70,10 @@ const Nav = () => {
             </SupLi>
             <SupLi>
               <Alink href="#">
-                <Navimg src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/starter_navy.png"></Navimg>
+                <Navimg
+                  src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/starter_navy.png"
+                  onClick={() => goTo("/product/razor-set")}
+                ></Navimg>
                 <LiText>면도기 세트</LiText>
               </Alink>
             </SupLi>
