@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 
-function FacesSection() {
+function FacesSection(props) {
+  const goTo = (path) => {
+    props.history.push(path);
+  };
   return (
     <FacesSectionStyle>
       <FacesImg
@@ -24,9 +28,7 @@ function FacesSection() {
           <br />
           <br />* 면도 구독서비스 1위(2020년 2월, 오픈서베이)
         </SeventhSectionP>
-        <StartingBtn href='https://www.wiselyshave.com/subscription-info'>
-          시작하기
-        </StartingBtn>
+        <StartingBtn onClick={() => goTo("/Survey0")}>시작하기</StartingBtn>
       </div>
     </FacesSectionStyle>
   );
@@ -77,4 +79,4 @@ const StartingBtn = styled.a`
   border-radius: 4px;
   cursor: pointer;
 `;
-export default FacesSection;
+export default withRouter(FacesSection);

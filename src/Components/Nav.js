@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import { withRouter } from "react-router-dom";
 
 const Nav = (props) => {
   const [seeSup, setSeeSup] = useState(false);
@@ -13,18 +14,18 @@ const Nav = (props) => {
     <div>
       <Header>
         <Naviga>
-          <h1 className="wisely" onClick={() => goTo("/")}>
-            <img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg" />
-          </h1>
+          <Hi1 className='wisely' onClick={() => goTo("/")}>
+            <img src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg' />
+          </Hi1>
 
           <nav>
             <Ul>
-              <a href="#">
+              <a href='#'>
                 <Li>
                   <span>시작하기</span>
                 </Li>
               </a>
-              <a href="#">
+              <a href='#'>
                 <Li
                   onClick={() => {
                     setSeeSup(!seeSup);
@@ -33,12 +34,12 @@ const Nav = (props) => {
                   <span>상품보기</span>
                 </Li>
               </a>
-              <a href="#">
+              <a href='#'>
                 <Li>
                   <span>와이즐리 이야기</span>
                 </Li>
               </a>
-              <a href="#">
+              <a href='#'>
                 <Li>
                   <span>고객센터</span>
                 </Li>
@@ -63,35 +64,35 @@ const Nav = (props) => {
         <Supsub>
           <SupUl>
             <SupLi>
-              <Alink href="#">
-                <Navimg1 src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/gift_set.png"></Navimg1>
+              <Alink href='#'>
+                <Navimg1 src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/gift_set.png'></Navimg1>
                 <LiText>선물세트</LiText>
               </Alink>
             </SupLi>
             <SupLi>
-              <Alink href="#">
+              <Alink href='#'>
                 <Navimg
-                  src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/starter_navy.png"
+                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/starter_navy.png'
                   onClick={() => goTo("/product/razor-set")}
                 ></Navimg>
                 <LiText>면도기 세트</LiText>
               </Alink>
             </SupLi>
             <SupLi>
-              <Alink href="#">
-                <Navimg src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/refill_blade.png"></Navimg>
+              <Alink href='#'>
+                <Navimg src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/refill_blade.png'></Navimg>
                 <LiText>리필 면도날</LiText>
               </Alink>
             </SupLi>
             <SupLi>
-              <Alink href="#">
-                <Navimg src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/shaving_gel_150.png"></Navimg>
+              <Alink href='#'>
+                <Navimg src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/shaving_gel_150.png'></Navimg>
                 <LiText>쉐이빙 젤</LiText>
               </Alink>
             </SupLi>
             <SupLi>
-              <Alink href="#">
-                <Navimg src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/after_shaving_gel_oily_60.png"></Navimg>
+              <Alink href='#'>
+                <Navimg src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/after_shaving_gel_oily_60.png'></Navimg>
                 <LiText>애프터쉐이브</LiText>
               </Alink>
             </SupLi>
@@ -102,7 +103,7 @@ const Nav = (props) => {
   );
 };
 
-export default Nav;
+export default withRouter(Nav);
 
 const Header = styled.header`
   height: 88px;
@@ -117,6 +118,10 @@ const Naviga = styled.div`
   justify-content: space-between;
   max-width: 1140px;
   height: 100%;
+`;
+
+const Hi1 = styled.h1`
+  cursor: pointer;
 `;
 
 const Ul = styled.ul`

@@ -10,7 +10,6 @@ import Survey3 from "./Pages/Survey/Survey3";
 import Survey4 from "./Pages/Survey/Survey4";
 import Survey5 from "./Pages/Survey/Survey5";
 import Razor from "./Pages/Razor";
-import "./Styles/Reset.scss";
 import SubScriptionInfo from "./Pages/SubScription-Info/SubScriptionInfo";
 
 class Routes extends Component {
