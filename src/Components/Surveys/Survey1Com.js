@@ -5,7 +5,9 @@ import NextBtnBox2 from "./NextBtnBox1_2";
 import NextBtnBox3 from "./NextBtnBox1_3";
 
 const SurveyFirCom = () => {
-  const tabs = ["하루에 여러 번", "하루에 한 번", "2~3일에 한 번"];
+  const [quesTitle, setQuesTitle] = useState();
+  const [answers, setAnswers] = useState([]);
+
   const tabimgs = [
     "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/shave4Week.svg",
     "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/shave8Week.svg",
@@ -21,12 +23,27 @@ const SurveyFirCom = () => {
     2: <NextBtnBox3 pTagText="" />,
   };
 
-  const [isContact, setIsContact] = useState(-1); //API로 담아서 백엔드로 보내야함 몇번 선택했는지
+  //REDUX!!!!!!!!!!!!!!!!
+  const [isContact1, setIsContact1] = useState(-1);
 
   //몇번 탭 idx인지 담아오기
   const clickHandlevent = (id) => {
-    setIsContact(id);
+    setIsContact1(id);
   };
+
+  useEffect(() => {
+    fetch("http://10.58.7.74:8000/subscription-survey/1")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("res.question :", res.data.question);
+        console.log("answers :", res.data.answers);
+
+        setQuesTitle(res.data.question);
+        setAnswers(res.data.answers);
+      });
+  }, []);
+
+  // console.log("answersisAn", answers);
 
   return (
     <SurveyFirComWrapper>
@@ -38,23 +55,23 @@ const SurveyFirCom = () => {
           </SurveyNumber>
 
           <SubTitle>
-            <SubTitleInn>얼마나 자주 면도하세요?</SubTitleInn>
+            <SubTitleInn>{quesTitle}</SubTitleInn>
           </SubTitle>
           {/**/}
           <SelectBox>
-            {tabs.map((tabname, idx) => {
+            {answers.map((tabname, idx) => {
               return (
                 <ItemBoxWrapper onClick={(e) => clickHandlevent(idx)}>
                   <ImgBox>
                     <ImgBoximage
                       src={
-                        isContact === idx
+                        isContact1 === idx
                           ? `${tabimgs[idx + 3]}`
                           : `${tabimgs[idx]}`
                       }
                     />
                   </ImgBox>
-                  <TextBox contactBoxchange={isContact} keyId={idx}>
+                  <TextBox contactBoxchange={isContact1} keyId={idx}>
                     <div>{tabname}</div>
                   </TextBox>
                 </ItemBoxWrapper>
@@ -62,7 +79,7 @@ const SurveyFirCom = () => {
             })}
           </SelectBox>
           {/**/}
-          <div>{obj[isContact]}</div>
+          <div>{obj[isContact1]}</div>
         </InnerWrapper>
       </SubWrapper>
     </SurveyFirComWrapper>

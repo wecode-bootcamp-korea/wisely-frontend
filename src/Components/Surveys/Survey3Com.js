@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { connect } from "react-redux";
+import { addSelect3 } from "../../store/actions/addSelect3";
 import { withRouter } from "react-router-dom";
 
 const SurveySeComCopy = (props) => {
-  // const tabs = [
-  //   "강한 자극과 따가움",
-  //   "피부 붉어짐",
-  //   "상처와 트러블",
-  //   "건조하고 당기는 피부",
-  //   "수염이 바짝 깎이지 않음",
-  //   "없음",
-  // ];
+  const [quesTitle, setQuesTitle] = useState();
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://10.58.7.74:8000/subscription-survey/3")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("제목타이틀 :", res.data.question);
+        console.log("answers :", res.data.answers);
+
+        setQuesTitle(res.data.question);
+        setAnswers(res.data.answers);
+      });
+  }, []);
 
   const goTo = (path) => {
     props.history.push(path);
+    props.addSelect3(isThree);
   };
 
-  const [isContact, setIsContact] = useState(-1);
+  const [isContact3, setIsContact3] = useState(-1);
+  const [isThree, setIsThree] = useState(-1);
 
   const [keyId0, setKeyId0] = useState(false);
   const [keyId1, setKeyId1] = useState(false);
@@ -27,44 +37,50 @@ const SurveySeComCopy = (props) => {
 
   //클릭할때 트루가 폴스로 바뀌어야하는데 그게 안됨..
   const keyClickHandle0 = (id) => {
-    setIsContact(id);
+    setIsContact3(id);
     setKeyId0(`${!keyId0}`);
     setKeyId5(false);
+    setIsThree("1");
     console.log("클릭");
   };
 
   const keyClickHandle1 = (id) => {
-    setIsContact(id);
+    setIsContact3(id);
     setKeyId1(`${!keyId1}`);
     setKeyId5(false);
+    setIsThree("1");
   };
 
   const keyClickHandle2 = (id) => {
-    setIsContact(id);
+    setIsContact3(id);
     setKeyId2(`${!keyId2}`);
     setKeyId5(false);
+    setIsThree("1");
   };
 
   const keyClickHandle3 = (id) => {
-    setIsContact(id);
+    setIsContact3(id);
     setKeyId3(`${!keyId3}`);
     setKeyId5(false);
+    setIsThree("1");
   };
 
   const keyClickHandle4 = (id) => {
-    setIsContact(id);
+    setIsContact3(id);
     setKeyId4(`${!keyId4}`);
     setKeyId5(false);
+    setIsThree("1");
   };
 
   const keyClickHandle5 = (id) => {
-    setIsContact(id);
+    setIsContact3(id);
     setKeyId5(true);
     setKeyId0(false);
     setKeyId1(false);
     setKeyId2(false);
     setKeyId3(false);
     setKeyId4(false);
+    setIsThree("2");
   };
 
   return (
@@ -76,68 +92,66 @@ const SurveySeComCopy = (props) => {
             <TotalNum> / 04</TotalNum>
           </SurveyNumber>
           <SubTitle>
-            <SubTitleInn>
-              면도할 때 느끼는 불편함을 모두 선택해주세요
-            </SubTitleInn>
+            <SubTitleInn>{quesTitle}</SubTitleInn>
           </SubTitle>
           <SelectBox>
             <ItemBoxWrapper
               onClick={(e) => keyClickHandle0(0)}
-              contactBoxchange={isContact}
+              contactBoxchange={isContact3}
               keyTandF={keyId0}
             >
-              <TextBox contactBoxchange={isContact} keyTandF={keyId5}>
-                <div>강한 자극과 따가움</div>
+              <TextBox contactBoxchange={isContact3} keyTandF={keyId5}>
+                <div>{answers[0]}</div>
               </TextBox>
             </ItemBoxWrapper>
 
             <ItemBoxWrapper
               onClick={(e) => keyClickHandle1(1)}
-              contactBoxchange={isContact}
+              contactBoxchange={isContact3}
               keyTandF={keyId1}
             >
-              <TextBox contactBoxchange={isContact} keyTandF={keyId5}>
-                <div>피부 붉어짐</div>
+              <TextBox contactBoxchange={isContact3} keyTandF={keyId5}>
+                <div>{answers[1]}</div>
               </TextBox>
             </ItemBoxWrapper>
 
             <ItemBoxWrapper
               onClick={(e) => keyClickHandle2(2)}
-              contactBoxchange={isContact}
+              contactBoxchange={isContact3}
               keyTandF={keyId2}
             >
-              <TextBox contactBoxchange={isContact} keyTandF={keyId5}>
-                <div>상처와 트러블</div>
+              <TextBox contactBoxchange={isContact3} keyTandF={keyId5}>
+                <div>{answers[2]}</div>
               </TextBox>
             </ItemBoxWrapper>
 
             <ItemBoxWrapper
               onClick={(e) => keyClickHandle3(3)}
-              contactBoxchange={isContact}
+              contactBoxchange={isContact3}
               keyTandF={keyId3}
             >
-              <TextBox contactBoxchange={isContact} keyTandF={keyId5}>
-                <div>건조하고 당기는 피부</div>
+              <TextBox contactBoxchange={isContact3} keyTandF={keyId5}>
+                <div>{answers[3]}</div>
               </TextBox>
             </ItemBoxWrapper>
 
             <ItemBoxWrapper
               onClick={(e) => keyClickHandle4(4)}
-              contactBoxchange={isContact}
+              contactBoxchange={isContact3}
               keyTandF={keyId4}
             >
-              <TextBox contactBoxchange={isContact} keyTandF={keyId5}>
-                <div>수염이 바짝 깎이지 않음</div>
+              <TextBox contactBoxchange={isContact3} keyTandF={keyId5}>
+                <div>{answers[4]}</div>
               </TextBox>
             </ItemBoxWrapper>
 
             <ItemBoxWrapper
               onClick={(e) => keyClickHandle5(5)}
-              contactBoxchange={isContact}
+              contactBoxchange={isContact3}
               keyTandF={keyId5}
             >
-              <TextBox contactBoxchange={isContact} keyTandF={keyId5}>
-                <div>없음</div>
+              <TextBox contactBoxchange={isContact3} keyTandF={keyId5}>
+                <div>{answers[5]}</div>
               </TextBox>
             </ItemBoxWrapper>
           </SelectBox>
@@ -154,7 +168,7 @@ const SurveySeComCopy = (props) => {
   );
 };
 
-export default withRouter(SurveySeComCopy);
+export default withRouter(connect(null, { addSelect3 })(SurveySeComCopy));
 
 const SurveySeComWrapper = styled.div`
   min-height: calc(100vh - 89px);

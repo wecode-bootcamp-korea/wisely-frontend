@@ -130,5 +130,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+* {
+      font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+    } 
+
 `;
 export default GlobalStyles;

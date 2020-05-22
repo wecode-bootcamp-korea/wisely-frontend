@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
+import { withRouter } from "react-router-dom";
 
-const ResultTop = () => {
+const ResultTop = (props) => {
+  //false가 보임, true가 안보임
+  const [isZell, setIsZell] = useState(false);
+  const [isAfter, setIsAfter] = useState(false);
+
   return (
     <ResultTopWrappaer>
       <SubTitle>
@@ -11,19 +16,23 @@ const ResultTop = () => {
       </SubTitle>
       <ImgBox>
         <ImgBoxSub>
-          <Shaver>
-            <Img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/surveyResult/survey_result_razor_blue.png" />
+          <Shaverfix>
+            <Img src={props.shaverImgColor} />
             <Small>
               <Text>무료증정</Text>
             </Small>
-          </Shaver>
-          <Shaver>
+          </Shaverfix>
+          <Shaverfix>
             <Img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/surveyResult/survey_result_blade.png" />
-          </Shaver>
-          <Shaver>
+          </Shaverfix>
+          <Shaver FTFT={isZell}>
             <Img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/surveyResult/survey_result_gel.png" />
           </Shaver>
-          <Shaver>
+          <Shaver
+            FTFT={isAfter}
+            style={{ display: props.afterImgTf === "1" ? "flex" : "none" }}
+          >
+            {/* recoMmen는 answer_2가 '1'인지 '2'인지 가져옴 */}
             <Img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/surveyResult/survey_result_after_shaving_gel.png" />
           </Shaver>
         </ImgBoxSub>
@@ -72,7 +81,10 @@ const ResultTop = () => {
           </ImgText>
         </Pict>
         <BotBtn>
-          <BtnImg src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/arrowDownInCircle.svg" />
+          <BtnImg
+            onClick={() => props.clickScroll()}
+            src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/arrowDownInCircle.svg"
+          />
         </BotBtn>
       </PayMent>
     </ResultTopWrappaer>
@@ -114,10 +126,16 @@ const ImgBoxSub = styled.div`
   padding: 60px 0;
   display: flex;
   margin: 0 auto;
+  justify-content: center;
 `;
 
-//밑에 네개 하나로 통일할수도 있음
 const Shaver = styled.div`
+  width: 160px;
+  position: relative;
+  /* display: ${(props) => (props.recoMmen === 2 ? "none" : "flex")}; */
+`;
+
+const Shaverfix = styled(Shaver)`
   width: 160px;
   position: relative;
 `;

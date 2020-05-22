@@ -5,22 +5,32 @@ import NextBtnBox2_2 from "./NextBtnBox2_2";
 import NextBtnBox2_3 from "./NextBtnBox2_3";
 
 const SurveyTirComCopy = () => {
-  const tabs = [
-    "유분기가 많은 지성 피부",
-    "건조함을 자주 느끼는 건성 피부",
-    "잘 모르겠어요",
-  ];
+  const [quesTitle, setQuesTitle] = useState();
+  const [answers, setAnswers] = useState([]);
+
   const obj = {
     0: <NextBtnBox2_1 />,
     1: <NextBtnBox2_2 />,
     2: <NextBtnBox2_3 />,
   };
 
-  const [isContact, setIsContact] = useState(-1);
+  const [isContact2, setIsContact2] = useState(-1);
 
   const clickHandlevent = (id) => {
-    setIsContact(id);
+    setIsContact2(id);
   };
+
+  useEffect(() => {
+    fetch("http://10.58.7.74:8000/subscription-survey/2")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("question :", res.data.question);
+        console.log("answers :", res.data.answers);
+
+        setQuesTitle(res.data.question);
+        setAnswers(res.data.answers);
+      });
+  }, []);
 
   return (
     <SurveySeComWrapper>
@@ -31,17 +41,17 @@ const SurveyTirComCopy = () => {
             <TotalNum> / 04</TotalNum>
           </SurveyNumber>
           <SubTitle>
-            <SubTitleInn>어떤 피부 타입이신가요?</SubTitleInn>
+            <SubTitleInn>{quesTitle}</SubTitleInn>
           </SubTitle>
           <SelectBox>
-            {tabs.map((tabname, idx) => {
+            {answers.map((tabname, idx) => {
               return (
                 <ItemBoxWrapper
                   onClick={(e) => clickHandlevent(idx)}
-                  contactBoxchange={isContact}
+                  contactBoxchange={isContact2}
                   keyId={idx}
                 >
-                  <TextBox contactBoxchange={isContact} keyId={idx}>
+                  <TextBox contactBoxchange={isContact2} keyId={idx}>
                     <div>{tabname}</div>
                   </TextBox>
                 </ItemBoxWrapper>
@@ -49,7 +59,7 @@ const SurveyTirComCopy = () => {
             })}
           </SelectBox>
           {/**/}
-          <div>{obj[isContact]}</div>
+          <div>{obj[isContact2]}</div>
         </InnerWrapper>
       </SubWrapper>
     </SurveySeComWrapper>

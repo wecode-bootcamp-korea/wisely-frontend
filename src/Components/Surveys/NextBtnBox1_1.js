@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { connect } from "react-redux";
+import { addSelect1 } from "../../store/actions/addSelect1";
 import { withRouter } from "react-router-dom";
 
 const NextBtnBox1 = (props) => {
   const goTo = (path) => {
     props.history.push(path);
+    props.addSelect1("1");
   };
 
   return (
@@ -20,7 +23,7 @@ const NextBtnBox1 = (props) => {
   );
 };
 
-export default withRouter(NextBtnBox1);
+export default withRouter(connect(null, { addSelect1 })(NextBtnBox1));
 
 const NextBtnBox1Wrapper = styled.div`
   margin-top: 50px;
