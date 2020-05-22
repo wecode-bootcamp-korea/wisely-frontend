@@ -4,8 +4,7 @@ import Nav from "../Components/Nav";
 import Gq from "../Components/Ariticles/Gq";
 import Ja from "../Components/Ariticles/Ja";
 import Es from "../Components/Ariticles/Es";
-import FacesSection from "../Components/FacesSection";
-
+import FacesSection from "../Components/ProductDetail/FacesSection";
 import Footer from "../Components/Footer";
 import styled, { css } from "styled-components";
 

@@ -130,8 +130,8 @@ const BlueBackground = styled.div`
   top: 0;
   left: ${(props) => {
     if (props.steps === 1) return "0";
-    else if (props.steps === 2) return "135px";
-    else return "250px";
+    else if (props.steps === 2) return "137px";
+    else return "247px";
   }};
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out,
     color 0.5s ease-in-out;

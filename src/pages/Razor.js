@@ -4,22 +4,19 @@ import ProductsNav from "../Components/ProductDetail/ProductsNav";
 import OrderInfo from "../Components/ProductDetail/OrderInfo";
 import ShaveHabit from "../Components/ProductDetail/ShaveHabit";
 import Footer from "../Components/Footer";
+import ShoppingCart from "../Components/Purchase/ShoppingCart";
 import styled from "styled-components";
 
 function Razor() {
-  //   const currentScroll = window.scrollY;
-  //   console.log("요기요->", currentScroll);
-  //   const [scrolly, setScrolly] = useState(0);
-
-  //   useEffect(() => {
-  //     setScrolly(currentScroll);
-  //     console.log(scrolly);
-  //   }, [currentScroll, scrolly]);
-
+  const [btnClick, setBtnClick] = useState(false); //기본값은 false로 할 것!
+  // console.log("자식태그에서 클릭후에 -->", btnClick);
   return (
-    <>
+    <TopParentDiv fix={btnClick}>
       <Nav />
-      <ProductsNav />
+      <ProductsNav btnClick={btnClick} setBtnClick={setBtnClick} />
+      {btnClick && (
+        <ShoppingCart btnClick={btnClick} setBtnClick={setBtnClick} />
+      )}
       <RazorSetSection>
         <RazorSetSectionTextArea>
           <RazorSetSectionTextAreaH3>
@@ -217,9 +214,13 @@ function Razor() {
         </StarPointContainer>
       </ReviewContianer>
       <Footer />
-    </>
+    </TopParentDiv>
   );
 }
+
+const TopParentDiv = styled.div`
+  position: ${(props) => (props.fix === true ? "fixed" : "relative")};
+`;
 
 const RazorSetSection = styled.section`
   background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorSetMainBackground.png");

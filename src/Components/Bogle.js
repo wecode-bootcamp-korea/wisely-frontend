@@ -24,7 +24,7 @@ class Bogle extends Component {
 
   Updownbubble = (e) => {
     const yy = window.scrollY;
-    const xx = (yy - 487) / 10; // ((yy-487) * (1024/10000)); 이건 소수점4자리
+    const xx = (yy - 2357) / 10; // ((yy-487) * (1024/10000)); 이건 소수점4자리
     const popPop = 100 - xx; //버블이미지 height %
     this.setState({
       scrollyy: popPop,
