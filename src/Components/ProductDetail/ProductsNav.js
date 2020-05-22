@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-function ProductNav() {
+function ProductNav(props) {
+  const clickPurchase = () => {
+    props.setBtnClick(true);
+  };
   return (
     <ProductsNav>
+      {/* state && <div />
+      state && <right /> */}
       <ProductsNavDiv>
         <ProductNameDiv>
           면도기 세트
@@ -14,7 +19,7 @@ function ProductNav() {
           <LinkToReview>후기(22,415)</LinkToReview>
           <PriceDiv>8,900원</PriceDiv>
           <div>
-            <PurchaseBtn>구매하기</PurchaseBtn>
+            <PurchaseBtn onClick={() => clickPurchase()}>구매하기</PurchaseBtn>
           </div>
         </NavRight>
       </ProductsNavDiv>
@@ -23,11 +28,10 @@ function ProductNav() {
 }
 
 const ProductsNav = styled.div`
-  background-color: #fff;
-  opacity: 0.8;
+  background-color: rgb(255, 255, 255, 0.8);
   position: sticky;
   top: 0;
-  z-index: 0;
+  z-index: 1;
 `;
 
 const ProductsNavDiv = styled.div`
@@ -39,7 +43,7 @@ const ProductsNavDiv = styled.div`
   height: 68px;
   margin: 0 auto;
   padding: 0 32px;
-  z-index: 1;
+  z-index: 2;
 `;
 const ProductNameDiv = styled.div`
   display: flex;
@@ -77,8 +81,8 @@ const PriceDiv = styled(LinkToDetailDiv)`
 `;
 
 const PurchaseBtn = styled.button`
-  display: inline-block;
-  background: #0055b8;
+  z-index: 3;
+  background: rgb(0, 85, 184);
   text-align: center;
   font-size: 14px;
   color: #fff;
@@ -88,6 +92,7 @@ const PurchaseBtn = styled.button`
   height: 42px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 25);
   border-radius: 4px;
+  border-style: none;
 `;
 
 export default ProductNav;
