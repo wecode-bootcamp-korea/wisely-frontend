@@ -22,7 +22,9 @@ const Nav = (props) => {
             <Ul>
               <a href='#'>
                 <Li>
-                  <span>시작하기</span>
+                  <span onClick={() => goTo("/SubScription-Info")}>
+                    시작하기
+                  </span>
                 </Li>
               </a>
               <a href='#'>
