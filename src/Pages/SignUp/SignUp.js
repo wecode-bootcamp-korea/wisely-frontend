@@ -6,6 +6,7 @@ class SignUp extends Component {
         super();
 
         this.state = {
+            userMail: "",
             userPwd: "",
             userPhone: "",
             userBirth: "",
@@ -36,9 +37,11 @@ class SignUp extends Component {
         if(e.target.value === 0) {
             errorMsg = "필수 입력창입니다"
         } else {
-            const passRule = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+            const passRule = (/^[A-Za-z0-9]{6,12}$/).test(e.target.value);
             errorMsg = passRule ? "" : "비밀번호 양식을 확인 해 주세요"
         }
+
+        
         
         this.setState({
             userPwd: e.target.value,
@@ -71,7 +74,7 @@ class SignUp extends Component {
         if(!e.target.value) {
             birthErrorMsg = "생년월일은 번호는 필수 입력 창입니다";
         } else {
-            const birthDayRule = (/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/).test(e.target.value);
+            const birthDayRule = (/^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/).test(e.target.value);
             birthErrorMsg = birthDayRule ? "" : "생년월일을 올바르게 입력해주세요";
         }
 
@@ -88,13 +91,10 @@ class SignUp extends Component {
 
         if(!e.target.value) {
             nameErrorMsg = "이름은 필수 입력 창입니다";
-        } else {
-            const nameRule = (/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/).test(e.target.value);
-            nameErrorMsg = nameRule ? "" : "이름을 올바르게 입력해주세요";
         }
 
         this.setState({
-            userBirth: e.target.value,
+            userName: e.target.value,
             nameValid: !nameErrorMsg,
             nameError: nameErrorMsg
         })
@@ -105,7 +105,28 @@ class SignUp extends Component {
             infoBtn: !this.state.infoBtn
         })
     }
-    
+
+    clickSignup = e => {
+        fetch("http://10.58.7.74:8000/signup", {
+            method: "POST",
+            body: JSON.stringify({
+                email: this.state.userMail,
+                password: this.state.userPwd,
+                phone: this.state.userPhone,
+                birth: this.state.userBirth,
+                name: this.state.userName,
+                gender: '남성',
+                alarm_confirm: '1'
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                if(res.message === "SUCCESS") {
+                    this.props.history.push("/SignIn");
+                }
+            })
+    }
+
     render() {
         const { pwValid, birthValid, phoneValid, 
             nameValid, firstText, pwdError, phoneError, 
@@ -174,7 +195,7 @@ class SignUp extends Component {
                                     <GenderType>여자</GenderType>
                                 </GenderLabel>
                             </GenderContain>
-                            <SuccessBtn>가입완료</SuccessBtn>
+                            <SuccessBtn onClick={this.clickSignup}>가입완료</SuccessBtn>
                             <Terms>
                                 본인은 만 14세 이상이며, <TermsText>이용약관</TermsText>, <TermsText>개인정보 수집 및 이용</TermsText>, <br/>
                                 <TermsText>개인정보 제공 내용</TermsText>, <TermsText>전자금융거래 약관</TermsText>을 확인하였으며, 동의합니다.
@@ -202,6 +223,9 @@ class SignUp extends Component {
 const SignUpBg = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/signInBg.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
     height: 1400px;
 `;
 
