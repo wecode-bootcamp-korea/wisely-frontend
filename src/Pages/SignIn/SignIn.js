@@ -16,8 +16,11 @@ class SignIn extends Component {
         //초기값 설정
         this.state = {
             userEmail: "",
+            userPwd: "",
             isValid: false,
+            pwdValid: false,
             error: "",
+            wordError: "",
             isFirst: true,
         }
     }
@@ -29,33 +32,60 @@ class SignIn extends Component {
     }
 
     handleEmail = e => {
-        //e.target.value는 계속 쓰이는 값이므로 변수에 선언
-        const value = e.target.value;
-        //에러 메세지는 조건에 맞지 않을 경우 setState 되어야 하기 때문에 빈 문자열
         let error = "";
 
-        //에러 메세지가 발생하는 조건문
-        if (!value) {
-            //e.target.value에 대한 값이 들어 오지 않았을 경우 위와 같은 메세지를 return
+        if (!e.target.value) {
             error = "필수 입력창입니다"
         } else {
-            const flag = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
-            //삼항 연산자로 위의 정규 표현식 조건에 부합하는 경우 return(빈 문자열 아무 에러 메세지도 나오지 않음)
-            //조건에 부합하지 않는 경우 false(에러메시지)를 return
+            const flag = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(e.target.value);
             error = flag ? "" : "이메일 양식을 확인 해 주세요"
         }
 
         this.setState({
-            userEmail: value, //e.target.value가 state로 setState가 된다
-            isValid: !error, // input에 들어오는 value의 값이 undefinde 혹은 null이 아닐 때 isValid에 true를 선언
-            error: error,
+            userEmail: e.target.value,
+            isValid: !error, 
+            error: error
         });
     }
-    
+
+    handlePwd = e => {
+        let pwdError = "";
+
+        if (!e.target.value) {
+            pwdError = "필수 입력창입니다"
+        } else {
+            const pwdRule = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(e.target.value);
+            pwdError = pwdRule ? "" : "비밀번호 양식을 확인 해 주세요"
+        }
+
+        this.setState({
+            userPwd: e.target.value,
+            pwdValid: !pwdError, 
+            wordError: pwdError
+        });
+    }
+
+    clickHandle = e => {
+        fetch("http://10.58.7.74:8000/login", {
+            method: "POST",
+            body: JSON.stringify({
+                email: this.state.userEmail,
+                password: this.state.userPwd
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                if(res.token) {
+                    localStorage.setItem("access_token", res.token);
+                    this.props.history.push("/");
+                }
+            })
+    }
+
     render() {
-        const { isValid, error, isFirst } = this.state;
-        //첫 onBlur 이벤트가 실행 됬을 때와 isValid가 false(빈 문자열 일 때) 때만 스타일이 적용 될 수 있게
+        const { isValid, pwdValid, error, isFirst, wordError } = this.state;
         const shouldError = !isFirst && !isValid;
+        const secondError = !isFirst && !pwdValid;
         return (
             <SignInBg>
                 <SignInContain>
@@ -77,8 +107,15 @@ class SignIn extends Component {
                                     { shouldError && (<ImportEmail msg={ error } onChange={this.handleEmail}>
                                         {error}
                                     </ImportEmail>)}
+                                    <PwdBox boxMsg={ secondError }>
+                                        <SendPwd type="password" onChange={this.handlePwd} placeholder=" 비밀번호" onBlur={this.setIsFirst}/>
+                                        <SuccessPwd success={ pwdValid } onChange={this.handlePwd} />
+                                    </PwdBox>
+                                    { secondError && (<ImportPwd msgPwd={ wordError } onChange={this.handlePwd}>
+                                        { wordError }
+                                    </ImportPwd>)}
                                 </MailContain>
-                                <NextBtn a={isValid}>
+                                <NextBtn a={isValid && pwdValid} onClick={this.clickHandle}>
                                     다음
                                 </NextBtn>
                             </LoginTitle>
@@ -112,6 +149,9 @@ class SignIn extends Component {
 const SignInBg = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/signInBg.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
     height: 980px;
 `; 
 
@@ -180,6 +220,32 @@ const EmailIdBox = styled.div `
 `;
 
 const SendEmailId = styled.input `
+    font-weight: 300;
+    border: 0;
+    width: 80%;
+    height: 100%;
+    font-size: 18px;
+    line-height: 130%;
+    letter-spacing: -.06em;
+    margin-left: 4px;
+    outline-style: none;
+    &::placeholder {
+        opacity: 0.4;
+        font-size: 18px;
+        font-weight: 350;
+    }
+`;
+
+const PwdBox = styled.div `
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    height: 48px;
+    border-bottom: ${props => props.boxMsg ? "1px solid #ff1e1e" : "1px solid #ddd"};
+`;
+
+const SendPwd = styled.input `
     font-weight: 300;
     border: 0;
     width: 80%;
@@ -275,8 +341,24 @@ const CheckContain = styled.div `
     display: ${props => props.view ? "" : "none"};
 `;
 
+const SuccessPwd = styled.div `
+    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    width: 36px;
+    height: 36px;
+    display: ${props => props.success ? "" : "none"};
+`;
+
 const ImportEmail = styled.p `
     display: ${props => props.msg ? "" : "none"};
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: -.04em;
+    color: #ff1e1e;
+`;
+
+const ImportPwd= styled.p `
+    display: ${props => props.msgPwd ? "" : "none"};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
