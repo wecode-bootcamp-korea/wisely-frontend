@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import "../../Styles/Reset.scss";
 
 class SignUp extends Component {
     constructor() {
@@ -156,8 +157,6 @@ class SignUp extends Component {
         const secTypeError = !firstText && !phoneValid;
         const thrTypeError = !firstText && !birthValid;
         const fourTypeError = !firstText && !nameValid;
-        
-        // console.log("anonError :" , anonError)
 
         return(
             <SignUpBg>

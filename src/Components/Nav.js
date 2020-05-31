@@ -50,7 +50,7 @@ const Nav = (props) => {
           </nav>
 
           <Navright>
-            <span>로그인</span>
+            <span onClick={() => goTo("/SignIn")}>로그인</span>
             <Buckets>
               <Bucket>장바구니</Bucket>
               <Zero>0</Zero>

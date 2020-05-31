@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import "../../Styles/Reset.scss";
 
 createGlobalStyle `
     boby {
@@ -13,7 +14,6 @@ class SignIn extends Component {
     constructor() {
         super();
 
-        //초기값 설정
         this.state = {
             userEmail: "",
             userPwd: "",
@@ -116,7 +116,7 @@ class SignIn extends Component {
                                     </ImportPwd>)}
                                 </MailContain>
                                 <NextBtn a={isValid && pwdValid} onClick={this.clickHandle}>
-                                    다음
+                                        로그인
                                 </NextBtn>
                             </LoginTitle>
                         </LoginContent>
