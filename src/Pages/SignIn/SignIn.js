@@ -272,6 +272,8 @@ const NextBtn = styled.button `
     width: 100%;
     height: 60px;
     border-radius: 4px;
+    outline: 0;
+    border: 0;
     cursor: pointer;
 `;
 
