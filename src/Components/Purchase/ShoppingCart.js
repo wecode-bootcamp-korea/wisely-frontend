@@ -41,7 +41,7 @@ function ShoppingCart(props) {
       method: "POST",
       headers: {
         Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.pvaoHXfzEKZDOCUnkG9PGaEU995dykNUyOwbwbV2VtM",
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjl9.uEfzCzqm7MGcUTq0viohFeISBYzWqdYevUtZZjq4uvU",
       },
       body: JSON.stringify({
         gift_set_id: null,
