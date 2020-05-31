@@ -11,7 +11,7 @@ const Survey5 = (props) => {
   const [subimgShaver, setsubImgShaver] = useState();
 
   useEffect(() => {
-    fetch("http://10.58.7.74:8000/subscription-result", {
+    fetch("http://52.14.187.223:8000/subscription-result", {
       method: "POST",
       body: JSON.stringify({
         answer_1: props.redu1,
