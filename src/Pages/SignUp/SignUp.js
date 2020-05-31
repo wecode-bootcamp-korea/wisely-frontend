@@ -127,7 +127,7 @@ class SignUp extends Component {
     }
 
     clickSignup = e => {
-        fetch("http://52.14.187.223:8000/", {
+        fetch("http://52.14.187.223:8000/signup", {
             method: "POST",
             body: JSON.stringify({
                 email: this.state.userMail,
