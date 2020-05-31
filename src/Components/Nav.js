@@ -50,7 +50,7 @@ const Nav = (props) => {
           </nav>
 
           <Navright>
-            <span onClick={() => goTo("/SignIn")}>로그인</span>
+            <Login onClick={() => goTo("/SignIn")}>로그인</Login>
             <Buckets>
               <Bucket>장바구니</Bucket>
               <Zero>0</Zero>
@@ -178,6 +178,11 @@ const Buckets = styled.div`
 
 const Bucket = styled.span`
   margin-right: 4px;
+  cursor: pointer;
+`;
+
+const Login = styled.span `
+  cursor: pointer;
 `;
 
 const Zero = styled.div`

@@ -66,7 +66,7 @@ class SignIn extends Component {
     }
 
     clickHandle = e => {
-        fetch("http://10.58.7.74:8000/login", {
+        fetch("http://52.14.187.223:8000/", {
             method: "POST",
             body: JSON.stringify({
                 email: this.state.userEmail,
