@@ -3,6 +3,10 @@ import ItemsInCart from "./ItemsInCart";
 import styled from "styled-components";
 
 function ShoppingCart(props) {
+  // localStorage.setItem(
+  //   "access_token",
+  //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzN9.aTp_S4zzNX6i3O2Rq9HsifM0v5JYp7-LVlVOF07jdcE"
+  // );
   const imgAndNameArr = [
     {
       1: "미드나이트 네이비",
@@ -37,11 +41,10 @@ function ShoppingCart(props) {
   };
 
   const thisIsFetch = () => {
-    fetch("http://10.58.7.74:8000/cart", {
+    fetch("http://52.14.187.223:8000/cart", {
       method: "POST",
       headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.pvaoHXfzEKZDOCUnkG9PGaEU995dykNUyOwbwbV2VtM",
+        Authorization: localStorage.getItem("access_token"),
       },
       body: JSON.stringify({
         gift_set_id: null,
