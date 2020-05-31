@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 와이즐리 클론 PROJECT__FrontEnd
+면도기 구독 사이트, 피부/면도 타입에 따라 맞는 자사의 제품을 추천 해 주고 면도와 관련 된 정보를 지속적으로 제공 해 주는 서비스
 
-## Available Scripts
+## 개발 인원 및 기간
+- 기간: 2주(5월 11일 ~ 5월 22일)
+- 인원: 프론트 3명(주상하, 심기현, 정영미), 백엔드 2명(진성준, 박정인)
+- 백엔드 github: 
 
-In the project directory, you can run:
+## 프로젝트 주요 목적
+- 실제 협업시 사용하는 Scrum, Sprint Meeting, Stend Up Meeting 방식 경험.
+- FrontEnd / BackEnd 협업을 통한 커뮤니케이션 및 협동 작업의 중요성 이해.
+- 위 홈페이지에 대한 다양한 UI 및 디자인 요소, 애니메이션 등을 React/styled-components 로 구현.
+- 제작 과정에 있어 사용자 중심 구조에 대한 이해도 향상.
 
-### `yarn start`
+## 적용 기술 및 구현 기능
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 적용 기술
+- HTML
+- CSS
+- JavaScript
+- React
+- styled-components
+- Redux
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 구현 기능
 
-### `yarn test`
+#### 로그인 및 회원가입
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- JWT Access Token 전송.
+- 정규 표현식 사용으로 회원기입/로그인 형식 validation
 
-### `yarn build`
+#### Home 페이지
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- button 클릭시 해당 컨텐츠로 이동
+- transition을 사용한 클릭 이벤트
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### 시작하기 페이지
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### 랭킹 페이지
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 랭킹 컨텐츠 클릭 시 해당 제품 컨텐츠로 이동.
+- 실제 랭킹 반영.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### 랭킹 디테일 페이지
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- PagiNation 무한 스크롤 적용.
+- 해당 제품 클릭시 제품 디테일 페이지로 이동.
+- 제품 디테일 해당 별점 분포도를 그래프로 구현(라이브러리 사용).
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Video
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Clcik!!
