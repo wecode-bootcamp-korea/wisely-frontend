@@ -24,21 +24,7 @@ class SubScriptionStory extends Component {
         }
     }
 
-// componentDidMount = () => {
-//         window.addEventListener('scroll', this.startScroll)
-// }
-
-// startScroll = () => {
-//     this.setState({
-//         whichOne: this.state.whichOne + 1
-//     }, ()=> {console.log(this.state.whichOne)})
-//     console.log("hihihi");
-//     console.log(this.props.done);
-//     3이 되었을때
-//     this.props.done();
-// }
     render() {
-        // console.log(this.state.activeBtn);
         const { activeBtn } = this.state
         return (
             <MainSection>
