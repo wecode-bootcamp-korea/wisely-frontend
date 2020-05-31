@@ -14,7 +14,6 @@ class SignIn extends Component {
     constructor() {
         super();
 
-        //초기값 설정
         this.state = {
             userEmail: "",
             userPwd: "",
