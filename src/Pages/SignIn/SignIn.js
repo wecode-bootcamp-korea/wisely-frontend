@@ -66,7 +66,7 @@ class SignIn extends Component {
     }
 
     clickHandle = e => {
-        fetch("http://52.14.187.223:8000/", {
+        fetch("http://52.14.187.223:8000/login", {
             method: "POST",
             body: JSON.stringify({
                 email: this.state.userEmail,
@@ -75,8 +75,9 @@ class SignIn extends Component {
         })
             .then(res => res.json())
             .then(res => {
-                if(res.token) {
-                    localStorage.setItem("access_token", res.token);
+                console.log(res)
+                if(res.access_token) {
+                    localStorage.setItem("access_token", res.access_token);
                     this.props.history.push("/");
                 }
             })
