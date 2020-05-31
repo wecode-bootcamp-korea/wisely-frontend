@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import "../../Styles/Reset.scss";
 
 class SignUp extends Component {
     constructor() {
@@ -126,7 +127,7 @@ class SignUp extends Component {
     }
 
     clickSignup = e => {
-        fetch("http://10.58.7.74:8000/signup", {
+        fetch("http://52.14.187.223:8000/signup", {
             method: "POST",
             body: JSON.stringify({
                 email: this.state.userMail,
@@ -156,8 +157,6 @@ class SignUp extends Component {
         const secTypeError = !firstText && !phoneValid;
         const thrTypeError = !firstText && !birthValid;
         const fourTypeError = !firstText && !nameValid;
-        
-        // console.log("anonError :" , anonError)
 
         return(
             <SignUpBg>
@@ -601,6 +600,8 @@ const SuccessBtn = styled.button `
     width: 100%;
     height: 60px;
     border-radius: 4px;
+    outline: 0;
+    border: 0;
     cursor: pointer;
 `;
 

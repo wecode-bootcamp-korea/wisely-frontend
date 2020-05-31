@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import "../../Styles/Reset.scss";
 
 createGlobalStyle `
     boby {
@@ -13,7 +14,6 @@ class SignIn extends Component {
     constructor() {
         super();
 
-        //초기값 설정
         this.state = {
             userEmail: "",
             userPwd: "",
@@ -66,7 +66,7 @@ class SignIn extends Component {
     }
 
     clickHandle = e => {
-        fetch("http://10.58.7.74:8000/login", {
+        fetch("http://52.14.187.223:8000/login", {
             method: "POST",
             body: JSON.stringify({
                 email: this.state.userEmail,
@@ -75,8 +75,9 @@ class SignIn extends Component {
         })
             .then(res => res.json())
             .then(res => {
-                if(res.token) {
-                    localStorage.setItem("access_token", res.token);
+                console.log(res)
+                if(res.access_token) {
+                    localStorage.setItem("access_token", res.access_token);
                     this.props.history.push("/");
                 }
             })
@@ -116,7 +117,7 @@ class SignIn extends Component {
                                     </ImportPwd>)}
                                 </MailContain>
                                 <NextBtn a={isValid && pwdValid} onClick={this.clickHandle}>
-                                    다음
+                                    로그인
                                 </NextBtn>
                             </LoginTitle>
                         </LoginContent>
@@ -272,6 +273,8 @@ const NextBtn = styled.button `
     width: 100%;
     height: 60px;
     border-radius: 4px;
+    outline: 0;
+    border: 0;
     cursor: pointer;
 `;
 

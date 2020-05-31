@@ -9,7 +9,7 @@ const SurveySeComCopy = (props) => {
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-    fetch("http://10.58.7.74:8000/subscription-survey/3")
+    fetch("http://52.14.187.223:8000/subscription-survey/3")
       .then((res) => res.json())
       .then((res) => {
         console.log("제목타이틀 :", res.data.question);

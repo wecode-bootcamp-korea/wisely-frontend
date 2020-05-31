@@ -32,7 +32,7 @@ const SurveyFirCom = () => {
   };
 
   useEffect(() => {
-    fetch("http://10.58.7.74:8000/subscription-survey/1")
+    fetch("http://52.14.187.223:8000/subscription-survey/1")
       .then((res) => res.json())
       .then((res) => {
         console.log("res.question :", res.data.question);
