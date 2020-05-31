@@ -16,7 +16,7 @@ const SurveyFoCom = (props) => {
   const [isContact4, setIsContact4] = useState(0);
 
   useEffect(() => {
-    fetch("http://10.58.7.74:8000/subscription-survey/4")
+    fetch("http://52.14.187.223:8000/subscription-survey/4")
       .then((res) => res.json())
       .then((res) => {
         console.log("타이틀 :", res.data.question);

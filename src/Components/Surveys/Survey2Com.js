@@ -21,7 +21,7 @@ const SurveyTirComCopy = () => {
   };
 
   useEffect(() => {
-    fetch("http://10.58.7.74:8000/subscription-survey/2")
+    fetch("http://52.14.187.223:8000/subscription-survey/2")
       .then((res) => res.json())
       .then((res) => {
         console.log("question :", res.data.question);
