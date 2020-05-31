@@ -132,6 +132,7 @@ table {
 }
 * {
       font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+      box-sizing: border-box;
     } 
 
 `;
