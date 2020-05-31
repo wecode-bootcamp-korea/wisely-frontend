@@ -11,7 +11,6 @@ import Survey4 from "./Pages/Survey/Survey4";
 import Survey5 from "./Pages/Survey/Survey5";
 import Razor from "./Pages/Razor";
 import SubScriptionInfo from "./Pages/SubScription-Info/SubScriptionInfo";
-import "./Styles/Reset.scss";
 
 class Routes extends Component {
   render() {
