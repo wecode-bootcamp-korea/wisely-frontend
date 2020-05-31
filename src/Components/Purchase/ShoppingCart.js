@@ -37,11 +37,11 @@ function ShoppingCart(props) {
   };
 
   const thisIsFetch = () => {
-    fetch("http://10.58.7.74:8000/cart", {
+    fetch("http://52.14.187.223:8000/cart", {
       method: "POST",
       headers: {
         Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjl9.uEfzCzqm7MGcUTq0viohFeISBYzWqdYevUtZZjq4uvU",
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.9vm5GcMo7UQDPHkZgqNUsAme9snYCxhknzMw_OycRes",
       },
       body: JSON.stringify({
         gift_set_id: null,
