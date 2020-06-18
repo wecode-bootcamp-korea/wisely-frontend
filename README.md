@@ -18,7 +18,7 @@
 - HTML
 - CSS
 - JavaScript
-- React
+- React.js
 - styled-components
 - Redux
 
@@ -34,16 +34,29 @@
 - button 클릭시 해당 컨텐츠로 이동
 - transition을 사용한 클릭 이벤트
 
-#### 시작하기 페이지
+#### 홈페이지
 
+- React hook, useState로 상태관리
+- 자식 컴포넌트에서 부모 컴포넌트로 상태 전달, 상태 변경으로 다른 컴포넌트 렌더링
+- 자식 컴포넌트 렌더시 keyframes변화로 animation 효과 적용
 
+### 면도기 세트 페이지
 
-#### 랭킹 페이지
+- 부모 컴포턴트로 부터 전달받은 state를  onClick 이벤트로 변경 후 다시 부모로 전달
+- state 관리로  장바구니 모달 구현
+- 로그인 후 access token을 fetch를 통해  장바구니의 데이터 받아오는 기능 구현
+- 장바구니에서 제품 삭제 기능 구현
 
+#### Nav Footer 컴포넌트 구현
+- fetch 함수 사용해 back-end로부터 api 받아와 설문페이지 선택사항 목록들 구현
+- tab이벤트를 사용해 조건에 따른 단일 선택과 다중선택 구현
+- scroll 이동에 따른 이미지 height변화 이벤트 구현
+- 리덕스 사용해 tab 선택 정보를 전역 관리하고 설문결과에서 불러오기 구현
 
-#### 랭킹 디테일 페이지
 
 
 ## Video
 
 Clcik!!
+
+https://youtu.be/Lrxk9zgUZl8
