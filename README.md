@@ -1,3 +1,5 @@
+![와이즐리 대문](https://user-images.githubusercontent.com/48509329/85009219-0cbc4880-b199-11ea-847c-ae461e590bba.png)
+
 # 와이즐리 클론 PROJECT__FrontEnd
 면도기 구독 사이트, 피부/면도 타입에 따라 맞는 자사의 제품을 추천 해 주고 면도와 관련 된 정보를 지속적으로 제공 해 주는 서비스
 
