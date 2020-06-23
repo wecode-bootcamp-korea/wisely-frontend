@@ -13,10 +13,12 @@ createGlobalStyle`
 
 export default function SignIn({email, password}) {
 
+    const [userEmail, setUserEamil] = useState("");
     const [warningEmail, setWarningEamil] = useState("");
     const [emailBorder, setEmailBorder] = useState(true);
     const [passEmail, setPassEmail] = useState(false);
     
+    const [userPwd, setUserPwd] = useState("");
     const [warningPwd, setWarningPwd] = useState("");
     const [pwdBorder, setPwdBorder] = useState(true);
     const [passPwd, setPassPwd] = useState(false);
@@ -38,10 +40,12 @@ export default function SignIn({email, password}) {
         const regExp = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(email);
 
         if(regExp) {
+            setUserEamil(email);
             setWarningEamil("");
             setEmailBorder(true);
             setPassEmail(true);
         } else if(!regExp) {
+            setUserEamil("");
             setWarningEamil("이메일 양식을 확인 해 주세요");
             setPassEmail(false);
             setEmailBorder(false);
@@ -65,10 +69,12 @@ export default function SignIn({email, password}) {
         const regExp = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(password);
          
         if(regExp) {
+            setUserPwd(password);
             setWarningPwd("");
             setPwdBorder(true);
             setPassPwd(true);
         } else if(!regExp) {
+            setUserPwd("");
             setWarningPwd("비밀번호 양식을 확인 해 주세요");
             setPwdBorder(false);
             setPassPwd(false);
@@ -80,8 +86,8 @@ export default function SignIn({email, password}) {
         fetch("http://52.14.187.223:8000/login", {
             method: "POST",
             body: JSON.stringify({
-                email: this.state.userEmail,
-                password: this.state.userPwd
+                email: userEmail,
+                password: userPwd
             })
         })
             .then(res => res.json())
