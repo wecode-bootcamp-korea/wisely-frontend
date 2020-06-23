@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+
+import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import "../../Styles/Reset.scss";
 
-createGlobalStyle `
+createGlobalStyle`
     boby {
         margin: 0;
         padding: 0;
@@ -10,62 +11,72 @@ createGlobalStyle `
     }
 `
 
-class SignIn extends Component {
-    constructor() {
-        super();
+export default function SignIn({email, password}) {
 
-        this.state = {
-            userEmail: "",
-            userPwd: "",
-            isValid: false,
-            pwdValid: false,
-            error: "",
-            wordError: "",
-            isFirst: true,
+    const [warningEmail, setWarningEamil] = useState("");
+    const [emailBorder, setEmailBorder] = useState(true);
+    const [passEmail, setPassEmail] = useState(false);
+    
+    const [warningPwd, setWarningPwd] = useState("");
+    const [pwdBorder, setPwdBorder] = useState(true);
+    const [passPwd, setPassPwd] = useState(false);
+
+    const emailNotValue = e => {
+        email = e.target.value;
+
+        if(!email) {
+            setWarningEamil("필수 입력창입니다");
+            setEmailBorder(false);
         }
     }
 
-    setIsFirst = () => {
-        this.setState({
-            isFirst: false,
-        })
-    }
+    const emailValidation = e => {
+        email = e.target.value;
+        setEmailBorder(false);
+        setPassEmail(false);
+        
+        const regExp = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(email);
 
-    handleEmail = e => {
-        let error = "";
-
-        if (!e.target.value) {
-            error = "필수 입력창입니다"
-        } else {
-            const flag = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(e.target.value);
-            error = flag ? "" : "이메일 양식을 확인 해 주세요"
+        if(regExp) {
+            setWarningEamil("");
+            setEmailBorder(true);
+            setPassEmail(true);
+        } else if(!regExp) {
+            setWarningEamil("이메일 양식을 확인 해 주세요");
+            setPassEmail(false);
+            setEmailBorder(false);
         }
-
-        this.setState({
-            userEmail: e.target.value,
-            isValid: !error, 
-            error: error
-        });
     }
 
-    handlePwd = e => {
-        let pwdError = "";
+    const pwdNotValue = e => {
+        password = e.target.value;
 
-        if (!e.target.value) {
-            pwdError = "필수 입력창입니다"
-        } else {
-            const pwdRule = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(e.target.value);
-            pwdError = pwdRule ? "" : "비밀번호 양식을 확인 해 주세요"
+        if(!password) {
+            setWarningPwd("필수 입력창입니다");
+            setPwdBorder(false);
         }
-
-        this.setState({
-            userPwd: e.target.value,
-            pwdValid: !pwdError, 
-            wordError: pwdError
-        });
     }
 
-    clickHandle = e => {
+    const pwdValidation = e => {
+        password = e.target.value;
+        setPwdBorder(false);
+        setPassPwd(false);
+        
+        const regExp = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(password);
+         
+        if(regExp) {
+            setWarningPwd("");
+            setPwdBorder(true);
+            setPassPwd(true);
+        } else if(!regExp) {
+            setWarningPwd("비밀번호 양식을 확인 해 주세요");
+            setPwdBorder(false);
+            setPassPwd(false);
+        }
+    }
+
+
+    const clickLogin = e => {
         fetch("http://52.14.187.223:8000/login", {
             method: "POST",
             body: JSON.stringify({
@@ -76,87 +87,113 @@ class SignIn extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                if(res.access_token) {
+                if (res.access_token) {
                     localStorage.setItem("access_token", res.access_token);
                     this.props.history.push("/");
                 }
             })
     }
 
-    render() {
-        const { isValid, pwdValid, error, isFirst, wordError } = this.state;
-        const shouldError = !isFirst && !isValid;
-        const secondError = !isFirst && !pwdValid;
-        return (
-            <SignInBg>
-                <SignInContain>
-                    <LogoContain>
-                        <Logo />
-                    </LogoContain>
-                    <SignInBox>
-                        <LoginContent>
-                            <LoginTitle>
-                                <p>
-                                    <Stro>로그인 및 회원가입</Stro><Spn>을</Spn>
-                                    <Pero>시작합니다.</Pero>
-                                </p>
-                                <MailContain>
-                                    <EmailIdBox boxMsg={ shouldError }>
-                                        <SendEmailId onChange={this.handleEmail} placeholder=" 이메일" onBlur={this.setIsFirst}/>
-                                        <CheckContain view={ isValid } onChange={this.handleEmail} />
-                                    </EmailIdBox>
-                                    { shouldError && (<ImportEmail msg={ error } onChange={this.handleEmail}>
-                                        {error}
-                                    </ImportEmail>)}
-                                    <PwdBox boxMsg={ secondError }>
-                                        <SendPwd type="password" onChange={this.handlePwd} placeholder=" 비밀번호" onBlur={this.setIsFirst}/>
-                                        <SuccessPwd success={ pwdValid } onChange={this.handlePwd} />
-                                    </PwdBox>
-                                    { secondError && (<ImportPwd msgPwd={ wordError } onChange={this.handlePwd}>
-                                        { wordError }
-                                    </ImportPwd>)}
-                                </MailContain>
-                                <NextBtn a={isValid && pwdValid} onClick={this.clickHandle}>
-                                    로그인
-                                </NextBtn>
-                            </LoginTitle>
-                        </LoginContent>
-                        <SignInOther>
-                            <ForgotEmail>
-                                <ForgotEmailText>
-                                    이메일 주소가 기억나지 않아요
-                                </ForgotEmailText>
-                            </ForgotEmail>
-                            <Another>
-                                또는
-                            </Another>
-                            <SignInKakao>
-                                <KakaoBtn>
-                                    <KaKaoImg />
-                                </KakaoBtn>
-                            </SignInKakao>
-                            <KakaoLoginTextBox>
-                                카카오톡
-                                <KakaoText> 간편시작</KakaoText>
-                            </KakaoLoginTextBox>
-                        </SignInOther>
-                    </SignInBox>
-                </SignInContain>
-            </SignInBg>
-        )
+    const enterLogin = e => {
+        fetch("http://52.14.187.223:8000/login", {
+            method: "POST",
+            body: JSON.stringify({
+                email: this.state.userEmail,
+                password: this.state.userPwd
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if (res.access_token) {
+                    localStorage.setItem("access_token", res.access_token);
+                    this.props.history.push("/");
+                }
+            })
     }
+
+
+    return (
+        <SignInBg>
+            <SignInContain>
+                <LogoContain>
+                    <Logo />
+                </LogoContain>
+                <SignInBox>
+                    <LoginContent>
+                        <LoginTitle>
+                            <p>
+                                <Stro>로그인 및 회원가입</Stro><Spn>을</Spn>
+                                <Pero>시작합니다.</Pero>
+                            </p>
+                            <MailContain>
+                                <EmailIdBox style={{ borderBottom: emailBorder ? "" : "1px solid #ff1e1e" }}>
+                                    <SendEmailId 
+                                        placeholder=" 이메일" 
+                                        onChange={ emailValidation } 
+                                        onBlur={ emailNotValue } 
+                                    />
+                                    <SuccessEamil cleanMail={ passEmail } />
+                                </EmailIdBox>
+                                <ImportEmail mailErr={ emailBorder }>
+                                  { warningEmail }
+                                </ImportEmail>
+                                <PwdBox style={{ borderBottom: pwdBorder ? "" : "1px solid #ff1e1e" }}>
+                                    <SendPwd 
+                                        type="password" 
+                                        placeholder=" 비밀번호" 
+                                        onChange={ pwdValidation } 
+                                        onBlur={ pwdNotValue }
+                                        onKeyUp={ (e) => window.event.keyCode === 13 ? enterLogin(e) : "" } 
+                                    />
+                                    <SuccessPwd cleanPwd={ passPwd } />
+                                </PwdBox>
+                                <ImportPwd pwdErr={ pwdBorder }>
+                                    { warningPwd }
+                                </ImportPwd>
+                            </MailContain>
+                            <NextBtn
+                            loginReady={ passEmail && passPwd } 
+                            onClick={ clickLogin }>
+                                로그인
+                            </NextBtn>
+                        </LoginTitle>
+                    </LoginContent>
+                    <SignInOther>
+                        <ForgotEmail>
+                            <ForgotEmailText>
+                                이메일 주소가 기억나지 않아요
+                                </ForgotEmailText>
+                        </ForgotEmail>
+                        <Another>
+                            또는
+                            </Another>
+                        <SignInKakao>
+                            <KakaoBtn>
+                                <KaKaoImg />
+                            </KakaoBtn>
+                        </SignInKakao>
+                        <KakaoLoginTextBox>
+                            카카오톡
+                                <KakaoText> 간편시작</KakaoText>
+                        </KakaoLoginTextBox>
+                    </SignInOther>
+                </SignInBox>
+            </SignInContain>
+        </SignInBg>
+    )
 }
 
-const SignInBg = styled.div `
+const SignInBg = styled.div`
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/signInBg.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: bottom;
     height: 980px;
-`; 
+`;
 
-const SignInContain = styled.div `
+const SignInContain = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -164,7 +201,7 @@ const SignInContain = styled.div `
     padding-top: 64px;
 `;
 
-const SignInBox = styled.div `
+const SignInBox = styled.div`
     width: 500px;
     height: 680px;
     margin-top: 40px;
@@ -173,54 +210,54 @@ const SignInBox = styled.div `
     background-color: #fff;
 `;
 
-const LoginContent = styled.div `
+const LoginContent = styled.div`
     padding: 60px 50px 0;
 `;
 
-const LoginTitle = styled.div `
+const LoginTitle = styled.div`
     margin-bottom: 15px;
 `;
 
-const Stro = styled.strong `
+const Stro = styled.strong`
     font-size: 45px;
 `;
 
-const Spn = styled.span `
+const Spn = styled.span`
     font-size: 45px;
     font-weight: 200;
 `;
 
-const Pero = styled.p `
+const Pero = styled.p`
     margin-top: 10px;
     font-size: 45px;
     font-weight: 200;
 `;
 
-const LogoContain = styled.div `
+const LogoContain = styled.div`
     margin-left: calc(19vw + 192px);
 `;
 
-const Logo = styled.div `
+const Logo = styled.div`
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg");
     width: 115px;
     height: 18px;
     cursor: pointer;
 `;
 
-const MailContain = styled.div `
+const MailContain = styled.div`
     margin-top: 55px;
 `;
 
-const EmailIdBox = styled.div `
+const EmailIdBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: ${props => props.boxMsg ? "1px solid #ff1e1e" : "1px solid #ddd"};
+    border-bottom: 1px solid #ddd;
 `;
 
-const SendEmailId = styled.input `
+const SendEmailId = styled.input`
     font-weight: 300;
     border: 0;
     width: 80%;
@@ -237,16 +274,16 @@ const SendEmailId = styled.input `
     }
 `;
 
-const PwdBox = styled.div `
+const PwdBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: ${props => props.boxMsg ? "1px solid #ff1e1e" : "1px solid #ddd"};
+    border-bottom: 1px solid #ddd;
 `;
 
-const SendPwd = styled.input `
+const SendPwd = styled.input`
     font-weight: 300;
     border: 0;
     width: 80%;
@@ -263,13 +300,13 @@ const SendPwd = styled.input `
     }
 `;
 
-const NextBtn = styled.button `
+const NextBtn = styled.button`
     text-align: center;
     font-size: 20px;
     color: #fff;
     margin-top: 40px;
     outline: none;
-    background-color: ${props => props.a ? "#0055b8" : "#cbcbcb"};
+    background-color: ${props => props.loginReady ? "#0055b8" : "#cbcbcb"};
     width: 100%;
     height: 60px;
     border-radius: 4px;
@@ -278,15 +315,15 @@ const NextBtn = styled.button `
     cursor: pointer;
 `;
 
-const SignInOther = styled.div `
+const SignInOther = styled.div`
     text-align: center;
 `;
 
-const ForgotEmail = styled.div `
+const ForgotEmail = styled.div`
     margin-bottom: 43px;
 `;
 
-const ForgotEmailText = styled.span `
+const ForgotEmailText = styled.span`
     font-size: 14px;
     font-weight: 300;
     letter-spacing: -.04em;
@@ -294,7 +331,7 @@ const ForgotEmailText = styled.span `
     border-bottom: 1px solid #979797;
     cursor: pointer;
 `
-const Another = styled.div `
+const Another = styled.div`
     font-weight: 300;
     color: #3a3a3a;
     letter-spacing: -.025em;
@@ -302,12 +339,12 @@ const Another = styled.div `
     margin-bottom: 28px;
 `;
 
-const SignInKakao = styled.div `
+const SignInKakao = styled.div`
     display: flex;
     justify-content: center;
 `;
 
-const KakaoBtn = styled.div `
+const KakaoBtn = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,13 +355,13 @@ const KakaoBtn = styled.div `
     cursor: pointer;
 `;
 
-const KaKaoImg = styled.div `
+const KaKaoImg = styled.div`
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/kakaoLoginIcon.svg");
     width: 25px;
     height: 25px;
 `;
 
-const KakaoLoginTextBox = styled.div `
+const KakaoLoginTextBox = styled.div`
     margin-top: 9px;
     font-weight: 300;
     font-size: 12px;
@@ -333,26 +370,26 @@ const KakaoLoginTextBox = styled.div `
     color: #3a3a3a;
 `;
 
-const KakaoText = styled.span `
+const KakaoText = styled.span`
     font-weight: 400;
 `;
 
-const CheckContain = styled.div `
+const SuccessEamil = styled.div`
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.view ? "" : "none"};
+    display: ${props => props.cleanMail ? "" : "none"};
 `;
 
-const SuccessPwd = styled.div `
+const SuccessPwd = styled.div`
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.success ? "" : "none"};
+    display: ${props => props.cleanPwd ? "" : "none"};
 `;
 
-const ImportEmail = styled.p `
-    display: ${props => props.msg ? "" : "none"};
+const ImportEmail = styled.p`
+    display: ${props => props.mailErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -360,8 +397,8 @@ const ImportEmail = styled.p `
     color: #ff1e1e;
 `;
 
-const ImportPwd= styled.p `
-    display: ${props => props.msgPwd ? "" : "none"};
+const ImportPwd = styled.p`
+    display: ${props => props.pwdErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -369,5 +406,4 @@ const ImportPwd= styled.p `
     color: #ff1e1e;
 `;
 
-export default SignIn;
 
