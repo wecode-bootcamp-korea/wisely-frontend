@@ -104,8 +104,8 @@ export default function SignIn({email, password}) {
         fetch("http://52.14.187.223:8000/login", {
             method: "POST",
             body: JSON.stringify({
-                email: this.state.userEmail,
-                password: this.state.userPwd
+                email: userEmail,
+                password: userPwd
             })
         })
             .then(res => res.json())
