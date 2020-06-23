@@ -143,7 +143,8 @@ export default function SignIn({email, password}) {
                                         type="password" 
                                         placeholder=" 비밀번호" 
                                         onChange={ pwdValidation } 
-                                        onBlur={ pwdNotValue } 
+                                        onBlur={ pwdNotValue }
+                                        onKeyUp={ (e) => window.event.keyCode === 13 ? enterLogin(e) : "" } 
                                     />
                                     <SuccessPwd cleanPwd={ passPwd } />
                                 </PwdBox>
@@ -153,8 +154,7 @@ export default function SignIn({email, password}) {
                             </MailContain>
                             <NextBtn
                             loginReady={ passEmail && passPwd } 
-                            onClick={ clickLogin }
-                            onKeyUp={ (e) => window.event.keyCode === 13 ? enterLogin(e) : "" }>
+                            onClick={ clickLogin }>
                                 로그인
                             </NextBtn>
                         </LoginTitle>
