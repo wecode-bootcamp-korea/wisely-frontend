@@ -1,140 +1,179 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import "../../Styles/Reset.scss";
 
-class SignUp extends Component {
-    constructor() {
-        super();
+export default function SignUp ({email, password, name, phone, birth}) {
 
-        this.state = {
-            userMail: "",
-            userPwd: "",
-            userPhone: "",
-            userBirth: "",
-            userName: "",
-            mailError: "",
-            pwdError: "",
-            phoneError: "",
-            birthError: "",
-            nameError: "",
-            mailValid: false,
-            pwValid: false,
-            birthValid: false,
-            nameValid: false,
-            phoneValid: false,
-            firstText: true,
-            infoBtn : false,
+    const [userEmail, setUserEmail] = useState("");
+    const [warningEmail, setWarningEamil] = useState("");
+    const [emailBorder, setEmailBorder] = useState(true);
+    const [passEmail, setPassEmail] = useState(false);
+
+    const [userPwd, setUserPwd] = useState("");
+    const [warningPwd, setWarningPwd] = useState("");
+    const [pwdBorder, setPwdBorder] = useState(true);
+    const [passPwd, setPassPwd] = useState(false);
+
+    const [userName, setUserName] = useState("");
+    const [warningName, setWarningName] = useState("");
+    const [nameBorder, setNameBorder] = useState(true);
+    const [passName, setPassName] = useState(false);
+
+    const [userPhone, setUserPhone] = useState("");
+    const [warningPhone, setWarningPhone] = useState("");
+    const [phoneBorder, setPhoneBorder] = useState(true);
+    const [passPhone, setPassPhone] = useState(false);
+
+    const [userBirth, setUserBirth] = useState("");
+    const [warningBirth, setWarningBirth] = useState("");
+    const [birthBorder, setBirthBorder] = useState(true);
+    const [passBirth, setPassBirth] = useState(false);
+
+    const [infoBtn, setInfoBtn] = useState(false);
+
+    const emailNotValue = e => {
+        email = e.target.value;
+
+        if(!email) {
+            setWarningEamil("필수 입력창입니다");
+            setEmailBorder(false);
         }
     }
 
-    setFirText = () => {
-        this.setState({
-            firstText: false
-        })
-    }
-
-    handleEmail = e => {
-        let error = "";
-        console.log("handleEmail")
-        if (!e.target.value) {
-            error = "필수 입력창입니다"
-        } else {
-            const flag = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(e.target.value);
-            error = flag ? "" : "이메일 양식을 확인 해 주세요"
-        }
-
-        this.setState({
-            userMail: e.target.value,
-            mailValid: !error, 
-            mailError: error
-        });
-    }
-
-    changePwHandle = e => {
-
-        let errorMsg = "";        
+    const emailValidation = e => {
+        email = e.target.value;
+        setEmailBorder(false);
+        setPassEmail(false);
         
-        if(!e.target.value) {
-            errorMsg = "필수 입력창입니다"
-        } else {
-            const passRule = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(e.target.value);
-            errorMsg = passRule ? "" : "비밀번호 양식을 확인 해 주세요"
+        const regExp = (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(email);
+
+        if(regExp) {
+            setUserEmail(email);
+            setWarningEamil("");
+            setEmailBorder(true);
+            setPassEmail(true);
+        } else if(!regExp) {
+            setUserEmail("");
+            setWarningEamil("이메일 양식을 확인 해 주세요");
+            setPassEmail(false);
+            setEmailBorder(false);
         }
+    }
+
+    const pwdNotValue = e => {
+        password = e.target.value;
+
+        if(!password) {
+            setWarningPwd("필수 입력창입니다");
+            setPwdBorder(false);
+        }
+    }
+
+    const pwdValidation = e => {
+        password = e.target.value;
+        setPwdBorder(false);
+        setPassPwd(false);
         
-        this.setState({
-            userPwd: e.target.value,
-            pwValid: !errorMsg,
-            pwdError: errorMsg
-        })
-    }
-
-    changePhoneHandle = e => {
-
-        let phoneErrorMsg = "";
-        if(!e.target.value) {
-            phoneErrorMsg = "휴대폰 번호는 필수 입력 창입니다";
-        } else {
-            const phoneNumRule = (/^\d{3}-\d{3,4}-\d{4}$/).test(e.target.value);
-            phoneErrorMsg = phoneNumRule ? "" : "휴대폰 번호를 올바르게 입력해주세요";
+        const regExp = (/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/).test(password);
+         
+        if(regExp) {
+            setUserPwd(password);
+            setWarningPwd("");
+            setPwdBorder(true);
+            setPassPwd(true);
+        } else if(!regExp) {
+            setUserPwd("");
+            setWarningPwd("비밀번호 양식을 확인 해 주세요");
+            setPwdBorder(false);
+            setPassPwd(false);
         }
-
-        this.setState({
-            userPhone: e.target.value,
-            phoneValid: !phoneErrorMsg,
-            phoneError: phoneErrorMsg
-        })
     }
 
-    changeBirthHandle = e => {
+    const nameNotValue = e => {
+        name = e.target.value;
 
-        let birthErrorMsg = "";
-
-        if(!e.target.value) {
-            birthErrorMsg = "생년월일은 번호는 필수 입력 창입니다";
-        } else {
-            const birthDayRule = (/^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/).test(e.target.value);
-            birthErrorMsg = birthDayRule ? "" : "생년월일을 올바르게 입력해주세요";
+        if(!name) {
+            setUserName("");
+            setWarningName("이름은 필수 입력창입니다");
+            setNameBorder(false);
+            setPassName(false);
+        } else if(name) {
+            setUserName(name);
+            setPassName(true);
+            setNameBorder(true);
         }
-
-        this.setState({
-            userBirth: e.target.value,
-            birthValid: !birthErrorMsg,
-            birthError: birthErrorMsg
-        })
     }
 
-    changeNameHandle = e => {
 
-        let nameErrorMsg = "";
+    const phoneNotValue = e => {
+        phone = e.target.value;
 
-        if(!e.target.value) {
-            nameErrorMsg = "이름은 필수 입력 창입니다";
-        } else {
-            nameErrorMsg = "";
+        if(!phone) {
+            setWarningPhone("휴대폰번호는 필수 입력창입니다");
+            setPhoneBorder(false);
         }
-
-        this.setState({
-            userName: e.target.value,
-            nameValid: !nameErrorMsg,
-            nameError: nameErrorMsg
-        })
     }
 
-    clickHandle = e => {
-        this.setState({
-            infoBtn: !this.state.infoBtn
-        })
+
+    const phoneValidation = e => {
+        phone = e.target.value;
+        setPhoneBorder(false);
+        setPassPhone(false);
+        
+        const regExp = (/^\d{3}-\d{3,4}-\d{4}$/).test(phone);
+         
+        if(regExp) {
+            setUserPhone(phone);
+            setWarningPhone("");
+            setPhoneBorder(true);
+            setPassPhone(true);
+        } else if(!regExp) {
+            setUserPhone("");
+            setWarningPhone("휴대폰 번호를 올바르게 입력해주세요");
+            setPhoneBorder(false);
+            setPassPhone(false);
+        }
     }
 
-    clickSignup = e => {
+    const birthNotValue = e => {
+        birth = e.target.value;
+
+        if(!birth) {
+            setWarningBirth("생년월일은 필수 입력창입니다");
+            setBirthBorder(false);
+        }
+    }
+
+
+    const birthValidation = e => {
+        birth = e.target.value;
+        setBirthBorder(false);
+        setPassBirth(false);
+        
+        const regExp = (/^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/).test(birth);
+         
+        if(regExp) {
+            setUserBirth(birth);
+            setWarningBirth("");
+            setBirthBorder(true);
+            setPassBirth(true);
+        } else if(!regExp) {
+            setUserBirth("");
+            setWarningBirth("생년월일을 올바르게 입력해주세요");
+            setBirthBorder(false);
+            setPassBirth(false);
+        }
+    }
+
+    const clickSignup = e => {
         fetch("http://52.14.187.223:8000/signup", {
             method: "POST",
             body: JSON.stringify({
-                email: this.state.userMail,
-                password: this.state.userPwd,
-                phone: this.state.userPhone,
-                birth: this.state.userBirth,
-                name: this.state.userName,
+                email: userEmail,
+                password: userPwd,
+                phone: userPhone,
+                birth: userBirth,
+                name: userName,
                 gender: '남성',
                 alarm_confirm: '1'
             })
@@ -146,20 +185,15 @@ class SignUp extends Component {
                 }
             })
     }
+    
+    const clickFeed = e => {
+        setInfoBtn(!infoBtn);
+    }
 
-    render() {
-        const { pwValid, birthValid, phoneValid, 
-            nameValid, firstText, pwdError, phoneError, 
-            birthError, nameError, infoBtn, mailValid, mailError } = this.state
-        
-        const anonError = !firstText && !mailValid;
-        const firTypeError = !firstText && !pwValid;
-        const secTypeError = !firstText && !phoneValid;
-        const thrTypeError = !firstText && !birthValid;
-        const fourTypeError = !firstText && !nameValid;
-
-        return(
-            <SignUpBg>
+    console.log(userEmail);
+    
+    return (
+        <SignUpBg>
                 <SignUpContain>
                     <LogoContain>
                         <Logo />
@@ -171,45 +205,62 @@ class SignUp extends Component {
                         </SignUpTitle>
                         <InfoContain>
                             <IdBox>아이디</IdBox>
-                            <EmailIdContain msgBox={ anonError }>
-                                <DefaultId onChange={ this.handleEmail } onBlur={ this.setFirText } placeholder=" 이메일" />
-                                <CheckBoxOne viewOne={ mailValid } onChange={ this.handleEmail } />
+                            <EmailIdContain style={{ borderBottom: emailBorder ? "" : "1px solid #ff1e1e" }}>
+                                <DefaultId 
+                                    onChange={ emailValidation } 
+                                    onBlur={ emailNotValue } 
+                                    placeholder=" 이메일" 
+                                />
+                                <CheckBoxOne cleanMail={ passEmail } />
                             </EmailIdContain>
-                            { anonError && (<DangerMsg msgOne={ mailError } onChange={ this.handleEmail }>
-                                { mailError }
-                            </DangerMsg>) }
+                            <DangerMsg mailErr={ emailBorder }>
+                                { warningEmail }
+                            </DangerMsg>
                             <PwBox>비밀번호</PwBox>
-                            <PwContain msgBoxSec={ firTypeError }>
-                                <DefaultPw onChange={ this.changePwHandle } onBlur={ this.setFirText } type="password" placeholder=" 비밀번호(특수문자 포함 8자 이상)" />
-                                <CheckBoxTwo viewTwo={ pwValid } onChange={ this.changePwHandle } />
+                            <PwContain style={{ borderBottom: pwdBorder ? "" : "1px solid #ff1e1e" }}>
+                                <DefaultPw 
+                                    onChange={ pwdValidation } 
+                                    onBlur={ pwdNotValue } 
+                                    type="password" 
+                                    placeholder=" 비밀번호(특수문자 포함 8자 이상)" 
+                                />
+                                <CheckBoxTwo cleanPwd={ passPwd } />
                             </PwContain>
-                            { firTypeError && (<DangerMsgTwo msgTwo={ pwdError } onBlur={ this.setFirText } onChange={ this.changePwHandle }>
-                                { pwdError }
-                            </DangerMsgTwo>) }
+                            <DangerMsgTwo pwdErr={ pwdBorder } >
+                                { warningPwd }
+                            </DangerMsgTwo>
                             <PhoneNumBox>휴대폰번호</PhoneNumBox>
-                            <PhoneNumContain msgBoxThr={ secTypeError } onBlur={ this.setFirText } onChange={this.changePhoneHandle}>
-                                <DefaultPhoneNum placeholder=" 휴대폰번호('-'제외)" />
-                                <CheckBoxThree viewThr={ phoneValid } onChange={ this.changePhoneHandle } />
+                            <PhoneNumContain style={{ borderBottom: phoneBorder ? "" : "1px solid #ff1e1e" }} >
+                                <DefaultPhoneNum 
+                                    onChange={ phoneValidation } 
+                                    onBlur={ phoneNotValue } 
+                                    placeholder=" 휴대폰번호('-' 포함)" 
+                                />
+                                <CheckBoxThree cleanPhone={ passPhone } />
                             </PhoneNumContain>
-                            { secTypeError && (<DangerMsgThree msgThr={ phoneError } onChange={ this.changePhoneHandle }>
-                                    { phoneError }
-                                </DangerMsgThree>) }
+                            <DangerMsgThree phoneErr={ phoneBorder } >
+                                { warningPhone }
+                            </DangerMsgThree>
                             <BirthDayBox>생년월일</BirthDayBox>
-                            <BirthDayContain msgBoxfour={ thrTypeError }>
-                                <DefaultBirthDay onChange={ this.changeBirthHandle } onBlur={ this.setFirText } placeholder=" 생년월일(예:YYYY-MM-DD)" />
-                                <CheckBoxFour viewFour={ birthValid } onChange={ this.changeBirthHandle } />
+                            <BirthDayContain style={{ borderBottom: birthBorder ? "" : "1px solid #ff1e1e" }}>
+                                <DefaultBirthDay 
+                                    onChange={ birthValidation } 
+                                    onBlur={ birthNotValue } 
+                                    placeholder=" 생년월일(예:YYYY-MM-DD)" 
+                                />
+                                <CheckBoxFour cleanBirth={ passBirth } />
                             </BirthDayContain>
-                            { thrTypeError && (<DangerMsgFour msgFour={ birthError } onChange={ this.changeBirthHandle }>
-                                    { birthError }
-                                </DangerMsgFour>) }
+                            <DangerMsgFour birthErr={ birthBorder } >
+                                { warningBirth }
+                            </DangerMsgFour>
                             <NameBox>이름</NameBox>
-                            <NameContain msgBoxFive={ fourTypeError } >
-                                <DefaultName onChange={ this.changeNameHandle } onBlur={ this.setFirText } placeholder=" 이름"/>
-                                <CheckBoxFive viewFive={ nameValid } onChange={ this.changeNameHandle } />
+                            <NameContain style={{ borderBottom: nameBorder ? "" : "1px solid #ff1e1e" }} >
+                                <DefaultName onBlur={ nameNotValue } placeholder=" 이름"/>
+                                <CheckBoxFive cleanName={ passName } />
                             </NameContain>
-                            { fourTypeError && (<DangerMsgFive msgFive={ nameError } onChange={ this.changeNameHandle }>
-                                    { nameError }
-                                </DangerMsgFive>) }
+                            <DangerMsgFive nameErr={ nameBorder } >
+                                { warningName }
+                            </DangerMsgFive>
                             <GenderBox>성별</GenderBox>
                             <GenderContain>
                                 <GenderLabel>
@@ -221,7 +272,11 @@ class SignUp extends Component {
                                     <GenderType>여자</GenderType>
                                 </GenderLabel>
                             </GenderContain>
-                            <SuccessBtn onClick={this.clickSignup}>가입완료</SuccessBtn>
+                            <SuccessBtn 
+                                signUpReady={ (passEmail&&passPwd) && (passPhone&&passBirth) && passName } 
+                                onClick={ clickSignup }>
+                                가입완료
+                            </SuccessBtn>
                             <Terms>
                                 본인은 만 14세 이상이며, <TermsText>이용약관</TermsText>, <TermsText>개인정보 수집 및 이용</TermsText>, <br/>
                                 <TermsText>개인정보 제공 내용</TermsText>, <TermsText>전자금융거래 약관</TermsText>을 확인하였으며, 동의합니다.
@@ -230,8 +285,8 @@ class SignUp extends Component {
                                 <MarketingTitle>
                                     와이즐리 혜택 알림 받기
                                 </MarketingTitle>
-                                <Switch change={ infoBtn } onClick={this.clickHandle}>
-                                    <SlideBall change={ infoBtn } onClick={this.clickHandle} />
+                                <Switch change={ infoBtn } onClick={ clickFeed }>
+                                    <SlideBall change={ infoBtn } onClick={ clickFeed } />
                                 </Switch>
                             </MarketingBox>
                             <MarketingInfo>
@@ -242,8 +297,7 @@ class SignUp extends Component {
                     </SignUpBox>
                 </SignUpContain>
             </SignUpBg>
-        )
-    }
+    )
 }
 
 const SignUpBg = styled.div `
@@ -317,7 +371,7 @@ const EmailIdContain = styled.div `
     justify-content: space-between;
     align-items: center;
     height: 48px;
-    border-bottom: ${props => props.msgBox ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: 1px solid #ddd;
 `;
 
 const DefaultId = styled.input `
@@ -340,35 +394,35 @@ const CheckBoxOne = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.viewOne ? "" : "none"};
+    display: ${props => props.cleanMail ? "" : "none"};
 `;
 
 const CheckBoxTwo = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.viewTwo ? "" : "none"};
+    display: ${props => props.cleanPwd ? "" : "none"};
 `;
 
 const CheckBoxThree = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.viewThr ? "" : "none"};
+    display: ${props => props.cleanPhone ? "" : "none"};
 `;
 
 const CheckBoxFour = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.viewFour ? "" : "none"};
+    display: ${props => props.cleanBirth ? "" : "none"};
 `;
 
 const CheckBoxFive = styled.div `
     background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
     width: 36px;
     height: 36px;
-    display: ${props => props.viewFive ? "" : "none"};
+    display: ${props => props.cleanName ? "" : "none"};
 `;
 
 const PwBox = styled.div `
@@ -387,11 +441,11 @@ const PwContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: ${props => props.msgBoxSec ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: 1px solid #ddd;
 `;
 
 const DangerMsg = styled.p `
-    display: ${props => props.msgOne ? "" : "none"};
+    display: ${props => props.mailErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -400,7 +454,7 @@ const DangerMsg = styled.p `
 `;
 
 const DangerMsgTwo = styled.p `
-    display: ${props => props.msgTwo ? "" : "none"};
+    display: ${props => props.pwdErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -409,7 +463,7 @@ const DangerMsgTwo = styled.p `
 `;
 
 const DangerMsgThree = styled.p `
-    display: ${props => props.msgThr ? "" : "none"};
+    display: ${props => props.phoneErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -418,7 +472,7 @@ const DangerMsgThree = styled.p `
 `;
 
 const DangerMsgFour = styled.p `
-    display: ${props => props.msgFour ? "" : "none"};
+    display: ${props => props.birthErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -427,7 +481,7 @@ const DangerMsgFour = styled.p `
 `;
 
 const DangerMsgFive = styled.p `
-    display: ${props => props.msgFive? "" : "none"};
+    display: ${props => props.nameErr ? "none" : ""};
     margin-top: 8px;
     font-size: 12px;
     line-height: 100%;
@@ -467,7 +521,7 @@ const PhoneNumContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: ${props => props.msgBoxThr ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: 1px solid #ddd;
 `;
 
 const DefaultPhoneNum = styled.input `
@@ -502,7 +556,7 @@ const BirthDayContain = styled.div `
     align-items: center;
     margin-top: 10px;
     height: 48px;
-    border-bottom: ${props => props.msgBoxfour ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: 1px solid #ddd;
 `;
 
 const DefaultBirthDay = styled.input `
@@ -537,7 +591,7 @@ const NameContain = styled.div `
     align-items: center;
     margin-top: 1px;
     height: 48px;
-    border-bottom: ${props => props.msgBoxFive ? "1px solid #ff1e1e" : "1px solid #ddd" };
+    border-bottom: 1px solid #ddd;
 `;
 
 const DefaultName = styled.input `
@@ -596,7 +650,7 @@ const SuccessBtn = styled.button `
     color: #fff;
     margin-top: 40px;
     outline: none;
-    background-color: #0055b8;
+    background-color: ${props => props.signUpReady ? "#0055b8" : "#ddd"};
     width: 100%;
     height: 60px;
     border-radius: 4px;
@@ -671,5 +725,3 @@ const MarketingInfo = styled.div `
     letter-spacing: -.04em;
     color: #979797;
 `;
-
-export default SignUp;
