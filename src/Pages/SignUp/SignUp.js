@@ -97,8 +97,9 @@ export default function SignUp ({email, password, name, phone, birth}) {
             setWarningName("이름은 필수 입력창입니다");
             setNameBorder(false);
             setPassName(false);
-        } else if(name) {
+        } else {
             setUserName(name);
+            setWarningName("");
             setPassName(true);
             setNameBorder(true);
         }
