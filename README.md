@@ -29,7 +29,8 @@
 #### 로그인 및 회원가입
 
 - JWT Access Token 전송.
-- 정규 표현식 사용으로 회원가입/로그인 형식 validation
+- 정규 표현식 사용으로 회원가입/로그인 Validation 구현
+
 
 #### Home 페이지
 
