@@ -30,6 +30,9 @@
 
 - JWT Access Token 전송.
 - 정규 표현식 사용으로 회원가입/로그인 Validation 구현
+- React Hooks(useState) 를 이용한 상태 관리
+- React 내장 이벤트 사용
+- fetch를 이용한 백엔드와 api 송신
 
 #### 시작하기 페이지
 
