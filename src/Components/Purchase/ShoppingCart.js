@@ -10,17 +10,17 @@ function ShoppingCart(props) {
   const imgAndNameArr = [
     {
       1: "미드나이트 네이비",
-      2: "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razor_lie_navy.png",
+      2: "https://test.png",
     },
 
     {
       1: "사파이어 블루",
-      2: "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razor_lie_blue.png",
+      2: "https://test.png",
     },
 
     {
       1: "슬레이트 그레이",
-      2: "https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razor_lie_gray.png",
+      2: "https://test.png",
     },
   ];
   const [responseData, setResponseData] = useState([]);
@@ -111,7 +111,7 @@ function ShoppingCart(props) {
                     <DetailInfo>
                       <span>자세히</span>
                       <img
-                        src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/arrowRightBlack.svg'
+                        src='https://test.svg'
                         alt=''
                       />
                     </DetailInfo>
@@ -123,12 +123,12 @@ function ShoppingCart(props) {
                 >
                   {selectShavingGel ? (
                     <CheckedImg
-                      src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/circleCheckOn.svg'
+                      src='https://test.svg'
                       alt=''
                     />
                   ) : (
                     <CheckedImg
-                      src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/circleCheckOff.svg'
+                      src='https://test.svg'
                       alt=''
                     />
                   )}
@@ -155,7 +155,7 @@ function ShoppingCart(props) {
                     <DetailInfo>
                       <span>자세히</span>
                       <img
-                        src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/arrowRightBlack.svg'
+                        src='https://test.svg'
                         alt=''
                       />
                     </DetailInfo>
@@ -167,12 +167,12 @@ function ShoppingCart(props) {
                 >
                   {selectAfterShave ? (
                     <CheckedImg
-                      src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/circleCheckOn.svg'
+                      src='https://test.svg'
                       alt=''
                     />
                   ) : (
                     <CheckedImg
-                      src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/circleCheckOff.svg'
+                      src='https://test.svg'
                       alt=''
                     />
                   )}
@@ -304,7 +304,7 @@ const CartTitleArrow = styled.div`
   width: 24px;
   height: 24px;
   margin-top: 1px;
-  background: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/backArrow.svg");
+  background: url("https://test.svg");
   background-size: 100%;
   cursor: pointer;
   visibility: ${(props) => (props.display === 1 ? "visible" : "hidden")};
@@ -453,7 +453,7 @@ const ShavingGelImg = styled.div`
   position: relative;
   width: 360px;
   height: 320px;
-  background: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/shavingGelCarouselImg1Pc.png")
+  background: url("https://test.png")
     no-repeat;
   background-size: cover;
 `;
@@ -526,7 +526,7 @@ const CurrentPrice = styled.span`
 `;
 
 const AfterShaveImg = styled(ShavingGelImg)`
-  background: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/shavingGelCarouselImg2Pc.png");
+  background: url("https://test.png");
   background-size: cover;
 `;
 

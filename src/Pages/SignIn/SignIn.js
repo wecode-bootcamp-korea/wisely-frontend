@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { history } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import "../../Styles/Reset.scss";
 
@@ -95,7 +96,7 @@ export default function SignIn({email, password}) {
                 console.log(res)
                 if (res.access_token) {
                     localStorage.setItem("access_token", res.access_token);
-                    this.props.history.push("/");
+                    history.push("/");
                 }
             })
     }
@@ -113,7 +114,7 @@ export default function SignIn({email, password}) {
                 console.log(res)
                 if (res.access_token) {
                     localStorage.setItem("access_token", res.access_token);
-                    this.props.history.push("/");
+                    history.push("/");
                 }
             })
     }
@@ -191,7 +192,7 @@ export default function SignIn({email, password}) {
 }
 
 const SignInBg = styled.div`
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/signInBg.png");
+    background-image: url("https://test.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
@@ -244,7 +245,7 @@ const LogoContain = styled.div`
 `;
 
 const Logo = styled.div`
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg");
+    background-image: url("https://test.svg");
     width: 115px;
     height: 18px;
     cursor: pointer;
@@ -362,7 +363,7 @@ const KakaoBtn = styled.div`
 `;
 
 const KaKaoImg = styled.div`
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/kakaoLoginIcon.svg");
+    background-image: url("https://test.svg");
     width: 25px;
     height: 25px;
 `;
@@ -381,14 +382,14 @@ const KakaoText = styled.span`
 `;
 
 const SuccessEamil = styled.div`
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanMail ? "" : "none"};
 `;
 
 const SuccessPwd = styled.div`
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanPwd ? "" : "none"};

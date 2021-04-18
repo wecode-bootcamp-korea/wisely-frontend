@@ -9,7 +9,7 @@ const Changecolor = () => {
         <br />
         독일산 5중 면도날
       </TextH2>
-      <Shaperimg src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/subscription/razor_navy.png"></Shaperimg>
+      <Shaperimg src="https://test.png"></Shaperimg>
     </ChangecolorWrapper>
   );
 };

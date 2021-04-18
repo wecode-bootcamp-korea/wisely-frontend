@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { history } from "react-router-dom";
 import styled from "styled-components";
 import "../../Styles/Reset.scss";
 
@@ -182,7 +183,7 @@ export default function SignUp ({email, password, name, phone, birth}) {
             .then(res => res.json())
             .then(res => {
                 if(res.message === "SUCCESS") {
-                    this.props.history.push("/SignIn");
+                    history.push("/SignIn");
                 }
             })
     }
@@ -190,8 +191,6 @@ export default function SignUp ({email, password, name, phone, birth}) {
     const clickFeed = e => {
         setInfoBtn(!infoBtn);
     }
-
-    console.log(userEmail);
     
     return (
         <SignUpBg>
@@ -302,7 +301,7 @@ export default function SignUp ({email, password, name, phone, birth}) {
 }
 
 const SignUpBg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/signInBg.png");
+    background-image: url("https://test.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
@@ -333,7 +332,7 @@ const LogoContain = styled.div `
 `;
 
 const Logo = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg");
+    background-image: url("https://test.svg");
     width: 115px;
     height: 18px;
     cursor: pointer;
@@ -392,35 +391,35 @@ const DefaultId = styled.input `
 `;
 
 const CheckBoxOne = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanMail ? "" : "none"};
 `;
 
 const CheckBoxTwo = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanPwd ? "" : "none"};
 `;
 
 const CheckBoxThree = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanPhone ? "" : "none"};
 `;
 
 const CheckBoxFour = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanBirth ? "" : "none"};
 `;
 
 const CheckBoxFive = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/checkBlue.svg");
+    background-image: url("https://test.svg");
     width: 36px;
     height: 36px;
     display: ${props => props.cleanName ? "" : "none"};

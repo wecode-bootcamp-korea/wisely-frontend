@@ -112,7 +112,7 @@ const FirStrWrapper = styled.div `
 `;
 
 const FirStrImg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorDesignStory/razor_design_story_1.png");
+    background-image: url("https://test.png");
     background-size: cover;
     object-position: center;
     object-fit: cover;
@@ -205,7 +205,7 @@ const SubTitle = styled.div `
 `;
 
 const SecStrImg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorDesignStory/razor_design_story_2.png");
+    background-image: url("https://test.png");
     background-size: cover;
     object-position: center;
     object-fit: cover;
@@ -221,7 +221,7 @@ const SecStrTitle = styled.div `
 `;
 
 const ThrStrImg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorDesignStory/razor_design_story_3.png");
+    background-image: url("https://test.png");
     background-size: cover;
     object-position: center;
     object-fit: cover;

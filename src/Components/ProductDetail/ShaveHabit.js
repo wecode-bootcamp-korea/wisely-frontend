@@ -50,7 +50,7 @@ const ShaveHabit = () => {
       </LeftDiv>
       <RightDiv>
         <RightImg
-          src={`https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorHabit/razor_habit_${clickedNum}.png`}
+          src={`https:test.png`}
           alt=''
         />
       </RightDiv>

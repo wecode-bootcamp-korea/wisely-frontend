@@ -98,7 +98,7 @@ const Line = styled.div`
 `;
 
 const Buble = styled.div`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/bubblePrice/bubble_500x500.png");
+  background-image: url("https://test.png");
   height: ${(props) => props.isHeight}%;
   transform: rotate(180deg);
   background-size: cover;
@@ -109,7 +109,7 @@ const Buble = styled.div`
 `;
 
 const Shaverimg = styled.div`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/bubblePrice/razor_500x500.png");
+  background-image: url("https://test.png");
   z-index: -1;
   position: absolute;
   height: 100%;

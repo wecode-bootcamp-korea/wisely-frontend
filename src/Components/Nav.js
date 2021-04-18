@@ -15,7 +15,7 @@ const Nav = (props) => {
       <Header>
         <Naviga>
           <Hi1 className='wisely' onClick={() => goTo("/")}>
-            <img src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/WiselyLogo.svg' />
+            <img src='https://test.svg' />
           </Hi1>
 
           <nav>
@@ -67,14 +67,14 @@ const Nav = (props) => {
           <SupUl>
             <SupLi>
               <Alink href='#'>
-                <Navimg1 src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/gift_set.png'></Navimg1>
+                <Navimg1 src='https://test.png'></Navimg1>
                 <LiText>선물세트</LiText>
               </Alink>
             </SupLi>
             <SupLi>
               <Alink href='#'>
                 <Navimg
-                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/starter_navy.png'
+                  src='https://test.png'
                   onClick={() => goTo("/product/razor-set")}
                 ></Navimg>
                 <LiText>면도기 세트</LiText>
@@ -82,19 +82,19 @@ const Nav = (props) => {
             </SupLi>
             <SupLi>
               <Alink href='#'>
-                <Navimg src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/refill_blade.png'></Navimg>
+                <Navimg src='https://test.png'></Navimg>
                 <LiText>리필 면도날</LiText>
               </Alink>
             </SupLi>
             <SupLi>
               <Alink href='#'>
-                <Navimg src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/shaving_gel_150.png'></Navimg>
+                <Navimg src='https://test.png'></Navimg>
                 <LiText>쉐이빙 젤</LiText>
               </Alink>
             </SupLi>
             <SupLi>
               <Alink href='#'>
-                <Navimg src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/navigation/after_shaving_gel_oily_60.png'></Navimg>
+                <Navimg src='https://test.png'></Navimg>
                 <LiText>애프터쉐이브</LiText>
               </Alink>
             </SupLi>

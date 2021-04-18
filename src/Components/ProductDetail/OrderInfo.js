@@ -25,7 +25,7 @@ const OrderInfo = () => {
         <NoticeList>
           <span>주문 및 배송 안내</span>
           <MiniPointerImg
-            src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/backAngleBracket.svg'
+            src='https://test.svg'
             art=''
             click={clickone}
           />
@@ -62,7 +62,7 @@ const OrderInfo = () => {
         <NoticeList>
           <span>상품 정보 / 거래조건</span>
           <MiniPointerImg
-            src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/backAngleBracket.svg'
+            src='https://test.svg'
             art=''
             click={clicktwo}
           />

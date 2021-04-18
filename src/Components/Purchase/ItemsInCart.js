@@ -46,7 +46,7 @@ function ItemsInCart(props) {
             <DeleteProduct>
               <img
                 onClick={() => setDeleteItem(!deleteItem)}
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/smallXmark.svg'
+                src='https:test.svg'
                 alt=''
               />
             </DeleteProduct>

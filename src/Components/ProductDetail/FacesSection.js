@@ -8,10 +8,7 @@ function FacesSection(props) {
   };
   return (
     <FacesSectionStyle>
-      <FacesImg
-        src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_subscription.png'
-        art=''
-      />
+      <FacesImg src='https://test.png' art=''/>
       <div>
         <SeventhSectionH2>
           구독으로 만나는

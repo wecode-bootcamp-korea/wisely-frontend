@@ -56,7 +56,7 @@ function Razor() {
       <RazorStorySection>
         <RazorStoryDiv>
           <RazorStoryImgSection
-            src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorDesignStory/razor_design_story_1.png'
+            src='https://test.png'
             alt=''
           />
           <InnerSection>
@@ -84,7 +84,7 @@ function Razor() {
       <ReviewContianer>
         <div>
           <ReviewImg
-            src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/review/reviewPcFace.svg'
+            src='https://test.svg'
             art=''
           />
         </div>
@@ -102,60 +102,60 @@ function Razor() {
               <StarContainer>
                 <BlueStarContainer>
                   <BlueStar
-                    src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarFront.png'
+                    src='https://test.png'
                     alt=''
                   />
                 </BlueStarContainer>
                 <GrayStar
-                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarBack.png'
+                  src='https://test.png'
                   alt=''
                 />
               </StarContainer>
               <StarContainer>
                 <BlueStarContainer>
                   <BlueStar
-                    src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarFront.png'
+                    src='https://test.png'
                     alt=''
                   />
                 </BlueStarContainer>
                 <GrayStar
-                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarBack.png'
+                  src='https://test.png'
                   alt=''
                 />
               </StarContainer>
               <StarContainer>
                 <BlueStarContainer>
                   <BlueStar
-                    src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarFront.png'
+                    src='https://test.png'
                     alt=''
                   />
                 </BlueStarContainer>
                 <GrayStar
-                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarBack.png'
+                  src='https://test.png'
                   alt=''
                 />
               </StarContainer>
               <StarContainer>
                 <BlueStarContainer>
                   <BlueStar
-                    src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarFront.png'
+                    src='https://test.png'
                     alt=''
                   />
                 </BlueStarContainer>
                 <GrayStar
-                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarBack.png'
+                  src='https://test.png'
                   alt=''
                 />
               </StarContainer>
               <StarContainer>
                 <BlueHalfStarContainer>
                   <BlueStar
-                    src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarFront.png'
+                    src='https://test.png'
                     alt=''
                   />
                 </BlueHalfStarContainer>
                 <GrayStar
-                  src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/ratingStarBack.png'
+                  src='https://test.png'
                   alt=''
                 />
               </StarContainer>
@@ -223,7 +223,7 @@ const TopParentDiv = styled.div`
 `;
 
 const RazorSetSection = styled.section`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/razorSetMainBackground.png");
+  background-image: url("https://test.png");
   max-height: 852px;
   height: calc(100vh - 68px);
   padding: 0 50px;
@@ -306,7 +306,7 @@ const BrandStoryA = styled.a`
   cursor: pointer;
   &::after {
     content: "";
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/arrowRightBlue.svg");
+    background-image: url("https://test.svg");
     width: 6px;
     height: 11px;
     position: absolute;

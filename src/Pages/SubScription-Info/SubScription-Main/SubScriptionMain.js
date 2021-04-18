@@ -21,7 +21,7 @@ export default SubScriptionMain;
 
 const MainSection = styled.section `
     text-align: center; 
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/subscription/subscription_background.png");
+    background-image: url("https://test.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;

@@ -51,10 +51,10 @@ const Footer = () => {
               </DAdatext>
               <Dadalogo>
                 <Snslogo>
-                  <img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/facebook.svg" />
+                  <img src="https://test.svg" />
                 </Snslogo>
                 <Snslogo>
-                  <img src="https://wiselyshave-cdn.s3.amazonaws.com/assets/images/instagram.svg" />
+                  <img src="https://test.svg" />
                 </Snslogo>
               </Dadalogo>
             </Sectop>

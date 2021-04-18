@@ -60,7 +60,7 @@ function Home(props) {
       </SecondSection>
       <ThirdSection>
         <ThirdSectionImg
-          src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_fooled.png'
+          src='https://test.png'
           alr=''
         />
         <div>
@@ -91,7 +91,7 @@ function Home(props) {
           </FourthSectionP>
         </FourthSectionDiv>
         <FourthSectionImg
-          src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_razor_info.png'
+          src='https://test.png'
           art=''
         />
       </FourthSection>
@@ -103,7 +103,7 @@ function Home(props) {
           <FifthSectionFigContainer>
             <FifthSectionFig>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_1.png'
+                src='https://test.png'
                 art=''
               />
               <FigCaption>
@@ -113,7 +113,7 @@ function Home(props) {
             </FifthSectionFig>
             <FifthSectionFigRight>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_2.png'
+                src='https://test.png'
                 art=''
               />
               <FigCaption>
@@ -125,7 +125,7 @@ function Home(props) {
           <FifthSectionFigContainer>
             <FifthSectionFig>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_3.png'
+                src='https://test.png'
                 art=''
               />
               <FigCaption>
@@ -135,7 +135,7 @@ function Home(props) {
             </FifthSectionFig>
             <FifthSectionFigRight>
               <FifthSectionImg
-                src='https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/thumbnail_4.png'
+                src='https://test.png'
                 art=''
               />
               <FigCaption>
@@ -194,7 +194,7 @@ const HomeWrapper = styled.div`
 
 const FirstSection = styled.section`
   width: 100%;
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_background.png");
+  background-image: url("https://test.png");
   background-size: cover;
   text-align: center;
   padding-top: 60px;
@@ -242,7 +242,7 @@ const SecondSection = styled.section`
   height: 44.792vw;
   min-height: 860px;
   display: flex;
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/home/home_gift_set.png");
+  background-image: url("https://test.png");
   background-size: cover;
   padding: 0 50px;
   align-items: center;
@@ -316,7 +316,7 @@ const BrandStoryBtn = styled.a`
 const ThirdSectionSpan = styled.span`
   width: 6px;
   height: 11px;
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/arrow/arrowRightWhite.svg");
+  background-image: url("https://test.svg");
   background-size: cover;
   margin-left: 5px;
   display: inline-block;
@@ -446,7 +446,7 @@ const NewsP = styled.p`
 `;
 
 const QuoteStart = styled.i`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/startQuote.svg");
+  background-image: url("https://test.svg");
   position: absolute;
   width: 19px;
   height: 19px;
@@ -455,7 +455,7 @@ const QuoteStart = styled.i`
 `;
 
 const QuoteFinish = styled.i`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/finishQuote.svg");
+  background-image: url("https://test.svg");
   position: absolute;
   width: 19px;
   height: 19px;
@@ -467,7 +467,7 @@ const NewsList = styled.div`
   justify-content: space-around;
 `;
 const GQ = styled.span`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/news/news_1.svg");
+  background-image: url("https://test");
   width: 44px;
   height: 22px;
   cursor: pointer;
@@ -490,7 +490,7 @@ const GQ = styled.span`
     `}
 `;
 const JungAng = styled.span`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/news/news_2.svg");
+  background-image: url("https://test.svg");
   width: 81.76px;
   height: 22px;
   cursor: pointer;
@@ -513,7 +513,7 @@ const JungAng = styled.span`
     `}
 `;
 const Esquire = styled.span`
-  background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/news/news_3.svg");
+  background-image: url("https://test.svg");
   width: 76.56px;
   height: 22px;
   cursor: pointer;

@@ -75,7 +75,7 @@ const ContentBox = styled.div `
 `;
 
 const FirstItemImg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/subscription/subscription_free_icon_1.svg");
+    background-image: url("https://test.svg");
     background-size: cover;
     margin-bottom: 28px;
     width: 160px;
@@ -83,7 +83,7 @@ const FirstItemImg = styled.div `
 `;
 
 const SecItemImg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/subscription/subscription_free_icon_2.svg");
+    background-image: url("https://test.svg");
     background-size: cover;
     margin-bottom: 28px;
     width: 160px;
@@ -91,7 +91,7 @@ const SecItemImg = styled.div `
 `;
 
 const ThrItemImg = styled.div `
-    background-image: url("https://wiselyshave-cdn.s3.amazonaws.com/assets/images/background/subscription/subscription_free_icon_3.svg");
+    background-image: url("https://test.svg");
     background-size: cover;
     margin-bottom: 28px;
     width: 160px;
